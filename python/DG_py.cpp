@@ -1,13 +1,14 @@
 #include <pybind11/pybind11.h>
-
+#include <string>
+#include "../src/include/generate.h"
 
 namespace py = pybind11;
 
-float some_fn(float arg1, float arg2) {
-    return arg1 + arg2;
+void py_generate(std::string directory_name) {
+    dg::generate(directory_name);
 }
 
-PYBIND11_MODULE(module_name, handle) {
-    handle.doc() = "Doccie";
-    handle.def("inside_python_function", &some_fn);
+PYBIND11_MODULE(generate_directory, m) {
+    m.doc() = "Python wrapper for the FMM directory structure generator";
+    m.def("generate", &py_generate);
 }

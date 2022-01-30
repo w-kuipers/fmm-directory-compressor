@@ -1,16 +1,12 @@
-#ifndef GENERATE_H_INCLUDED
-#define GENERATE_H_INCLUDED
+#ifndef GENERATE_H
+#define GENERATE_H
 
 #include <bits/stdc++.h>
 #include <iostream>
 #include <sys/stat.h>
-#include <sys/types.h>
-#include <string>
-
-std::string sub_directory = "../tests/";
 
 namespace dg {
-    void structure_generate(std::string directory_name);
-}
+    void generate(std::string directory_name);
+} // namespace dg
 
 #endif

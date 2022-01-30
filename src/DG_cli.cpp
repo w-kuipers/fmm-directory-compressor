@@ -1,8 +1,7 @@
-#include "include/generate.cpp"
+#include "include/generate.h"
 
 // Namespace
 using namespace std;
-using namespace dg;
 
 int main() {
 
@@ -11,7 +10,7 @@ int main() {
     cout << "Please specify a name for the root directory (default=templatename): ";
     cin >> directory_name;
 
-    dg::structure_generate(directory_name);
+    dg::generate(directory_name);
         
     return 0;
 }

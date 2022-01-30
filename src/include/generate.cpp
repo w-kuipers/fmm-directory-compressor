@@ -1,8 +1,10 @@
 #include "generate.h"
 
-using namespace dg;
+// using namespace dg;
 
-void dg::structure_generate(std::string directory_name) {
+std::string sub_directory = "../tests/";
+
+void dg::generate(std::string directory_name) {
 
     std::string full_path = sub_directory + directory_name;
 
