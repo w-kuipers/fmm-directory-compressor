@@ -1,0 +1,14 @@
+{
+    "template_name": "Testing Template",
+    "structure": [
+        {
+            "title": "folder1"
+        },
+        {
+            "title": "folder2"
+        },
+        {
+            "title": "folder3"
+        }
+    ]
+}

@@ -11,7 +11,8 @@
 				"${file}",
 				"include/generate.cpp",
 				"-o",
-				"../build/${fileBasenameNoExtension}"
+				"../build/${fileBasenameNoExtension}",
+				"-ljsoncpp"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
