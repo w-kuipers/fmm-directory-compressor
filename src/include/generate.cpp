@@ -8,7 +8,7 @@ void dg::generate(std::string root_directory_name, Json::Value data) {
 
     std::string root_path = sub_directory + root_directory_name;
 
-    // Create root directory
+    // Create root directory with read/write/execute permissions
     if (mkdir(root_path.c_str(), 0777) == -1) {
         std::cerr << "Error: " << strerror(errno) << std::endl;
     }
