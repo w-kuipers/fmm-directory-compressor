@@ -4,8 +4,8 @@
 
 namespace py = pybind11;
 
-void py_generate(std::string directory_name) {
-    dg::generate(directory_name);
+void py_generate(std::string directory_name, std::string file_string) {
+    dg::from_file(directory_name, file_string);
 }
 
 PYBIND11_MODULE(generate_directory, m) {

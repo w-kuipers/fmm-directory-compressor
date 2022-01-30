@@ -8,7 +8,7 @@
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
-				"${file}",
+				"DG_cli.cpp",
 				"include/generate.cpp",
 				"-o",
 				"../build/${fileBasenameNoExtension}",
