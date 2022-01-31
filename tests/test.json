@@ -2,7 +2,12 @@
     "template_name": "Testing Template",
     "structure": [
         {
-            "title": "folder1"
+            "title": "folder1",
+            "sub": [
+                {
+                    "title": "folder1_chield"
+                }
+            ]
         },
         {
             "title": "folder2"

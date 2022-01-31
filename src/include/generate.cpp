@@ -28,10 +28,10 @@ void dg::generate(string root_directory_name, json json_data) {
     // Loop through subdirectories
     for (size_t d = 0; d < json_data["structure"].size(); d++) {
 
+        dg::check_subs(json_data["structure"][d]["sub"]);
+
         // Get directory name
         string directory_name = json_data["structure"][d]["title"];
-
-        cout << directory_name;
 
         // Format path
         string full_path = root_path + "/" + directory_name;
@@ -42,6 +42,15 @@ void dg::generate(string root_directory_name, json json_data) {
             return;
         }
     }
+}
+
+void dg::check_subs(json level) {
+
+    for (size_t s = 0; s < level.size(); s++) {
+        cout << level[s]["title"] << endl;
+    }
+
+    
 }
 
 void dg::from_file(string root_directory_name, string file_string) {
