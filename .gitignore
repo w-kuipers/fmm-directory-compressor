@@ -2,6 +2,9 @@ venv
 /build/*
 !/build/.gitkeep 
 
+/python/build/*
+!/python/build/.gitkeep 
+
 /lib/*
 !/lib/.gitkeep 
 
