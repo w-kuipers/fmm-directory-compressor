@@ -1,6 +1,4 @@
-#include <pybind11/pybind11.h>
-#include <string>
-#include "../src/include/generate.h"
+#include "include/DG_py.h"
 
 namespace py = pybind11;
 

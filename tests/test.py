@@ -4,4 +4,4 @@ sys.path.insert(0, '../build')
 
 from generate_directory import generate
 
-print(generate('pythonMappie', '../tests/test.json'))
+print(generate('pythonMappie', 'test.json'))

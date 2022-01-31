@@ -1,7 +1,5 @@
 #include "generate.h"
 #include "win32/make_dir.h"
-#include <json/json.h>
-#include <json/value.h>
 
 using namespace std;
 
@@ -9,11 +7,15 @@ using namespace std;
 string sub_directory = "../../tests/";
 #endif
 
+#ifdef __PYMODULE
+sub_directory = "../tests/";
+#endif
+
 #ifdef unix
 string sub_directory = "../tests/";
 #endif
 
-void dg::generate(string root_directory_name, Json::Value data) {
+void dg::generate(string root_directory_name, Json::Value json_data) {
 
     string root_path = sub_directory + root_directory_name;
 
@@ -23,20 +25,20 @@ void dg::generate(string root_directory_name, Json::Value data) {
     }
 
     // Loop through subdirectories
-    for (size_t d = 0; d < data["structure"].size(); d++) {
+    // for (size_t d = 0; d < json_data["structure"].size(); d++) {
 
-        // Get directory name
-        string directory_name = data["structure"][d]["title"].asString();
+    //     // Get directory name
+    //     string directory_name = json_data["structure"][d]["title"].asString();
 
-        // Format path
-        string full_path = root_path + "/" + directory_name;
+    //     // Format path
+    //     string full_path = root_path + "/" + directory_name;
 
-        // Create directory
-        if (!os_sp::make_dir(full_path)) {
-            cerr << "Error: " << strerror(errno) << endl;
-            return;
-        }
-    }
+    //     // Create directory
+    //     if (!os_sp::make_dir(full_path)) {
+    //         cerr << "Error: " << strerror(errno) << endl;
+    //         return;
+    //     }
+    // }
 }
 
 void dg::from_file(string root_directory_name, string file_string) {
@@ -45,10 +47,10 @@ void dg::from_file(string root_directory_name, string file_string) {
     ifstream file(file_string);
 
     // Parse JSON from file
-    Json::Value data;
+    Json::Value json_data;
     Json::Reader json_reader;
-    json_reader.parse(file, data);
+    json_reader.parse(file, json_data);
 
     // Call function to generate 
-    dg::generate(root_directory_name, data);
+    dg::generate(root_directory_name, json_data);
 }
