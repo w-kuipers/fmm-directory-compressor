@@ -1,11 +1,11 @@
 #ifndef GENERATE_H
 #define GENERATE_H
 
-#include <bits/stdc++.h>
 #include <iostream>
+#include <fstream>
 #include <sys/stat.h>
-#include <jsoncpp/json/json.h>
-#include <jsoncpp/json/value.h>
+#include <json/json.h>
+#include <json/value.h>
 
 namespace dg {
     void generate(std::string directory_name, Json::Value data);

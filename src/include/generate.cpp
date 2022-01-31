@@ -1,46 +1,48 @@
 #include "generate.h"
-#include <jsoncpp/json/json.h>
-#include <jsoncpp/json/value.h>
+#include "win32/make_dir.h"
+#include <json/json.h>
+#include <json/value.h>
 
-std::string sub_directory = "../tests/";
+using namespace std;
 
-void dg::generate(std::string root_directory_name, Json::Value data) {
+#ifdef _WIN32
+string sub_directory = "../../tests/";
+#endif
 
-    std::string root_path = sub_directory + root_directory_name;
+#ifdef unix
+string sub_directory = "../tests/";
+#endif
 
-    // Create root directory with read/write/execute permissions
-    if (mkdir(root_path.c_str(), 0777) == -1) {
-        std::cerr << "Error: " << strerror(errno) << std::endl;
-    }
-        
-    else {
-        std::cout << "Sucessfully generated directory structure" << std::endl;
+void dg::generate(string root_directory_name, Json::Value data) {
+
+    string root_path = sub_directory + root_directory_name;
+
+    // Create root directory
+    if (!os_sp::make_dir(root_path)) {
+        return; // Break function if root fails to generate
     }
 
     // Loop through subdirectories
-    for (int d = 0; d < data["structure"].size(); d++) {
+    for (size_t d = 0; d < data["structure"].size(); d++) {
 
         // Get directory name
-        std::string directory_name = data["structure"][d]["title"].asString();
+        string directory_name = data["structure"][d]["title"].asString();
 
         // Format path
-        std::string full_path = root_path + "/" + directory_name;
+        string full_path = root_path + "/" + directory_name;
 
         // Create directory
-        if (mkdir(full_path.c_str(), 0777) == -1) {
-            std::cerr << "Error: " << strerror(errno) << std::endl;
-        }
-            
-        else {
-            std::cout << "Sucessfully generated directory structure" << std::endl;
+        if (!os_sp::make_dir(full_path)) {
+            cerr << "Error: " << strerror(errno) << endl;
+            return;
         }
     }
 }
 
-void dg::from_file(std:: string root_directory_name, std::string file_string) {
+void dg::from_file(string root_directory_name, string file_string) {
 
     // Read file
-    std::ifstream file(file_string);
+    ifstream file(file_string);
 
     // Parse JSON from file
     Json::Value data;
