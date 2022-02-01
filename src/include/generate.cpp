@@ -18,7 +18,7 @@ string sub_directory = "../tests/";
 
 
 
-void dg::generate(string root_directory_name, json json_data) {
+void direcory_generate::generate(string root_directory_name, json json_data) {
 
     string root_path = sub_directory + root_directory_name;
 
@@ -30,7 +30,7 @@ void dg::generate(string root_directory_name, json json_data) {
     // Loop through subdirectories
     for (size_t d = 0; d < json_data["structure"].size(); d++) {
 
-        dg::check_subs(json_data["structure"][d]["sub"]);
+        direcory_generate::check_subs(json_data["structure"][d]["sub"]);
 
         // Get directory name
         string directory_name = json_data["structure"][d]["title"];
@@ -46,7 +46,7 @@ void dg::generate(string root_directory_name, json json_data) {
     };
 };
 
-void dg::from_file(string root_directory_name, string file_string) {
+void direcory_generate::from_file(string root_directory_name, string file_string) {
 
     // Read file
     ifstream file(file_string);
@@ -56,12 +56,12 @@ void dg::from_file(string root_directory_name, string file_string) {
     file >> json_data;
 
     // Call function to generate 
-    dg::generate(root_directory_name, json_data);
+    direcory_generate::generate(root_directory_name, json_data);
 };
 
 
 
-void dg::check_subs(json level) {
+void direcory_generate::check_subs(json level) {
 
     for (size_t s = 0; s < level.size(); s++) {
         cout << level[s]["title"] << endl;
