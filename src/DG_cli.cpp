@@ -2,6 +2,7 @@
 
 // Namespace
 using namespace std;
+dg dir_gen;
 
 int main() {
 
@@ -20,7 +21,7 @@ int main() {
     cout << "Please specify a name for the root directory (default=templatename): ";
     cin >> directory_name;
 
-    dg::from_file(directory_name, file);
+    dir_gen.from_file(directory_name, file);
         
     return 0;
-}
+};
