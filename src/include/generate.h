@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sys/stat.h>
-
+#include "boost/filesystem.hpp"
 #include "json.hpp"
 
 
@@ -17,6 +17,8 @@
 #endif
 
 using namespace nlohmann;
+using namespace std;
+namespace bfs =  boost::filesystem;
 
 class directory_generate {
     public:
@@ -26,8 +28,13 @@ class directory_generate {
         json generation_tree;
         json file_generation_tree;
         bool check_subs(json level);
-        void directory_generate::traverse(json json_data, std::string path);
-        void directory_generate::handle_files(json json_data, std::string path);
+        void traverse(json json_data, std::string path);
+        void handle_files(json json_data, std::string path);
+};
+
+class generate_file {
+    public:
+        void create();
 };
 
 #endif

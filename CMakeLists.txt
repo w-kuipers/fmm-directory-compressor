@@ -9,6 +9,11 @@ add_subdirectory(lib/pybind11)
 ## Windows compiling
 if (WIN32)
 
+    include(C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake)
+
+    find_package(Boost)
+
+    
     add_executable(FMMdirstructuregenerator src/DG_cli.cpp src/include/generate.cpp src/include/win32/make_dir.cpp)
     pybind11_add_module(generate_directory src/DG_py.cpp src/include/generate.cpp src/include/win32/make_dir.cpp)
 

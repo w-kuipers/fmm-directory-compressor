@@ -97,6 +97,11 @@
         "xlocmes": "cpp",
         "xlocmon": "cpp",
         "xloctime": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp",
+        "queue": "cpp",
+        "strstream": "cpp"
     },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

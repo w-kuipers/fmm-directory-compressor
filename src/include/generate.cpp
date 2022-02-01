@@ -1,7 +1,5 @@
 #include "generate.h"
 
-using namespace std;
-
 void directory_generate::from_file(string root_directory_name, string file_string, string location) {
 
     // Read file
@@ -18,7 +16,7 @@ void directory_generate::from_file(string root_directory_name, string file_strin
     for (size_t p = 0; p < directory_generate::generation_tree.size(); p++) {
         if (!os_sp::make_dir(directory_generate::generation_tree[p])) {
             return; // Break function if root fails to generate
-        };
+        }
     }
 
     // Generate files // TODO test on with linux filesystem
@@ -95,3 +93,15 @@ bool directory_generate::check_subs(json sub) {
     }
     return false;
 }
+
+void generate_file::create() {
+    bfs::path p = bfs::current_path();
+
+    cout << p;
+    
+    // directory_iterator it{p};
+    // while (it != directory_iterator{}) {
+    //     cout << *it++ << '\n';
+    // }
+        
+};
