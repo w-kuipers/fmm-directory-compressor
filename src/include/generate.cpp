@@ -16,37 +16,7 @@ sub_directory = "../tests/";
 string sub_directory = "../tests/";
 #endif
 
-
-
-void direcory_generate::generate(string root_directory_name, json json_data) {
-
-    string root_path = sub_directory + root_directory_name;
-
-    // Create root directory
-    if (!os_sp::make_dir(root_path)) {
-        return; // Break function if root fails to generate
-    };
-
-    // Loop through subdirectories
-    for (size_t d = 0; d < json_data["structure"].size(); d++) {
-
-        direcory_generate::check_subs(json_data["structure"][d]["sub"]);
-
-        // Get directory name
-        string directory_name = json_data["structure"][d]["title"];
-
-        // Format path
-        string full_path = root_path + "/" + directory_name;
-
-        // Create directory
-        if (!os_sp::make_dir(full_path)) {
-            cerr << "Error: " << strerror(errno) << endl;
-            return;
-        };
-    };
-};
-
-void direcory_generate::from_file(string root_directory_name, string file_string) {
+void directory_generate::from_file(string root_directory_name, string file_string) {
 
     // Read file
     ifstream file(file_string);
@@ -56,16 +26,52 @@ void direcory_generate::from_file(string root_directory_name, string file_string
     file >> json_data;
 
     // Call function to generate 
-    direcory_generate::generate(root_directory_name, json_data);
-};
+    directory_generate::create_generation_tree(root_directory_name, json_data);
 
+    // Generate directory tree
+    for (size_t p = 0; p < directory_generate::generation_tree.size(); p++) {
+        if (!os_sp::make_dir(directory_generate::generation_tree[p])) {
+            return; // Break function if root fails to generate
+        };
+    }
+    
+}
 
-
-void direcory_generate::check_subs(json level) {
-
-    for (size_t s = 0; s < level.size(); s++) {
-        cout << level[s]["title"] << endl;
-    };
+void directory_generate::create_generation_tree(string root_directory_name, json json_data) {
 
     
-};
+
+    string root_path = sub_directory + root_directory_name;
+
+    // Append root directory to generation tree
+    directory_generate::generation_tree[0] = root_path;
+
+    directory_generate::traverse(json_data["structure"], root_path);
+
+    return;
+}
+
+void directory_generate::traverse(json json_data, string path) {
+
+    for (size_t d = 0; d < json_data.size(); d++) {
+
+        string cur_title = json_data[d]["title"];
+        string new_path = path + "/" + cur_title;
+        directory_generate::generation_tree[directory_generate::generation_tree.size()] = new_path;
+
+        if (directory_generate::check_subs(json_data[d]["sub"])) {
+            directory_generate::traverse(json_data[d]["sub"], new_path);
+        }
+    }
+
+    return;
+}
+
+bool directory_generate::check_subs(json sub) {
+
+    // Subs exist if sub is not null
+    if (sub != nullptr) {
+        return true;
+    }
+    return false;
+}

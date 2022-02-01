@@ -2,7 +2,7 @@
 
 // Namespace
 using namespace std;
-direcory_generate dg;
+directory_generate dg;
 
 int main() {
 
