@@ -1,78 +1,96 @@
 {
     "template_name": "Testing Template",
-    "structure": [
-        {
-            "title": "folder1",
-            "sub": [
-                {
-                    "title": "folder1_child1",
-                    "sub": [
-                        {
-                            "title": "folder1_child1_child1"
-                        },
-                        {
-                            "title": "folder1_child1_child2",
-                            "sub": [
-                                {
-                                    "title": "folder1_child1_child2_child1",
-                                    "sub": [
-                                        {
-                                            "title": "folder1_child1_child2_child1_child1"
-                                        },
-                                        {
-                                            "title": "folder1_child1_child2_child1_child2"
-                                        },
-                                        {
-                                            "title": "folder1_child1_child2_child1_child3"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "title": "folder1_child1_child2_child2",
-                                    "sub": [
-                                        {
-                                            "title": "folder1_child1_child2_child2_child1"
-                                        },
-                                        {
-                                            "title": "folder1_child1_child2_child2_child2"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "title": "folder1_child1_child3"
-                        }
-                    ]
-                },
-                {
-                    "title": "folder1_child2",
-                    "sub": [
-                        {
-                            "title": "folder1_child2_child1"
-                        },
-                        {
-                            "title": "folder1_child2_child2"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "title": "folder2"
-        },
-        {
-            "title": "folder3",
-            "sub": [
-                {
-                    "title": "folder3_child1",
-                    "sub": [
-                        {
-                            "title": "folder3_child1_child"
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+    "structure": {
+        "sub": [
+            {
+                "title": "folder1",
+                "sub": [
+                    {
+                        "title": "folder1_child1",
+                        "sub": [
+                            {
+                                "title": "folder1_child1_child1"
+                            },
+                            {
+                                "title": "folder1_child1_child2",
+                                "sub": [
+                                    {
+                                        "title": "folder1_child1_child2_child1",
+                                        "sub": [
+                                            {
+                                                "title": "folder1_child1_child2_child1_child1"
+                                            },
+                                            {
+                                                "title": "folder1_child1_child2_child1_child2",
+                                                "content": [
+                                                    {
+                                                        "title": "deepfile.txt"
+                                                    },
+                                                    {
+                                                        "title": "moere.cpp"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "title": "folder1_child1_child2_child1_child3"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "folder1_child1_child2_child2",
+                                        "sub": [
+                                            {
+                                                "title": "folder1_child1_child2_child2_child1"
+                                            },
+                                            {
+                                                "title": "folder1_child1_child2_child2_child2"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "title": "folder1_child1_child3"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "folder1_child2",
+                        "sub": [
+                            {
+                                "title": "folder1_child2_child1"
+                            },
+                            {
+                                "title": "folder1_child2_child2"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "folder2",
+                "content": [
+                    {
+                        "title": "file.txt"
+                    },
+                    {
+                        "title": "code.cpp"
+                    }
+                ]
+            },
+            {
+                "title": "folder3",
+                "sub": [
+                    {
+                        "title": "folder3_child1",
+                        "sub": [
+                            {
+                                "title": "folder3_child1_child"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]   
+    }
 }

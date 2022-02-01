@@ -24,8 +24,10 @@ class directory_generate {
         void create_generation_tree(std::string directory_name, json json_data, std::string location);
     private:
         json generation_tree;
+        json file_generation_tree;
         bool check_subs(json level);
         void directory_generate::traverse(json json_data, std::string path);
+        void directory_generate::handle_files(json json_data, std::string path);
 };
 
 #endif

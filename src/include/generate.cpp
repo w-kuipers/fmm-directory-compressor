@@ -20,6 +20,14 @@ void directory_generate::from_file(string root_directory_name, string file_strin
             return; // Break function if root fails to generate
         };
     }
+
+    // Generate files // TODO test on with linux filesystem
+    for (size_t fp = 0; fp < directory_generate::file_generation_tree.size(); fp++) {
+        string cur_filename = directory_generate::file_generation_tree[fp];
+        ofstream cur_file(cur_filename);
+        cur_file << "temp data"; // TODO get real data
+        cur_file.close();
+    }
     
 }
 
@@ -29,8 +37,9 @@ void directory_generate::create_generation_tree(string root_directory_name, json
     string root_path = location + root_directory_name;
     directory_generate::generation_tree[0] = root_path;
 
-    // Call recursive function to walk through JSON tree
-    directory_generate::traverse(json_data["structure"], root_path);
+    // Call recursive functions to walk through JSON tree
+    directory_generate::traverse(json_data["structure"]["sub"], root_path); // Handles directories
+    directory_generate::handle_files(json_data["structure"]["content"], root_path); // Handles files
 
     return;
 }
@@ -49,6 +58,30 @@ void directory_generate::traverse(json json_data, string path) {
         if (directory_generate::check_subs(json_data[d]["sub"])) {
             directory_generate::traverse(json_data[d]["sub"], new_path);
         }
+
+        // Check if current level has files
+        if (directory_generate::check_subs(json_data[d]["content"])) {
+            directory_generate::handle_files(json_data[d]["content"], new_path);
+        }
+
+    }
+
+    return;
+}
+
+void directory_generate::handle_files(json json_data, string path) {
+
+    cout << json_data << endl;
+    cout << path << endl;
+
+    // Loop through sublevel
+    for (size_t d = 0; d < json_data.size(); d++) {
+
+        // Append current path to file generation tree
+        string cur_title = json_data[d]["title"];
+        string new_path = path + "/" + cur_title;
+
+        directory_generate::file_generation_tree[directory_generate::file_generation_tree.size()] = new_path;
     }
 
     return;
