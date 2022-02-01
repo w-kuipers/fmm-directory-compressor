@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <sys/stat.h>
-#include "boost/filesystem.hpp"
+#include <string>
+#include <boost/filesystem.hpp>
 #include "json.hpp"
 
 
@@ -34,7 +35,7 @@ class directory_generate {
 
 class generate_file {
     public:
-        void create();
+        void create(const bfs::path &search_here);
 };
 
 #endif

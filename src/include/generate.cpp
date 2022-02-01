@@ -19,7 +19,7 @@ void directory_generate::from_file(string root_directory_name, string file_strin
         }
     }
 
-    // Generate files // TODO test on with linux filesystem
+    // Generate files
     for (size_t fp = 0; fp < directory_generate::file_generation_tree.size(); fp++) {
         string cur_filename = directory_generate::file_generation_tree[fp];
         ofstream cur_file(cur_filename);
@@ -94,10 +94,29 @@ bool directory_generate::check_subs(json sub) {
     return false;
 }
 
-void generate_file::create() {
-    bfs::path p = bfs::current_path();
+void generate_file::create(const bfs::path &dir_path) {
+    
+    // Setup JSON
+    json structure;
+    structure["template_name"] = "TEST";
 
-    cout << p;
+    int count = 0;
+    bfs::directory_iterator end_itr;
+    for ( bfs::directory_iterator itr( dir_path );itr != end_itr; ++itr ) {
+        cout << itr->path() << endl;
+        cout << itr->path().filename() << endl;
+
+        structure["structure"][count] = itr->path().filename().string();;
+
+        cout << count << endl;
+
+        count++;
+    }
+
+    ofstream cur_file("../tests/generated_test.json");
+    cur_file << structure;
+    cur_file.close();
+
     
     // directory_iterator it{p};
     // while (it != directory_iterator{}) {

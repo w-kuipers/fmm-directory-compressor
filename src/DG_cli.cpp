@@ -26,7 +26,9 @@ int main() {
 
     // dg.from_file(directory_name, file, location);
 
-    gf.create();
+    string directory = "../tests/to_use";
+
+    gf.create(directory);
         
     return 0;
 };
