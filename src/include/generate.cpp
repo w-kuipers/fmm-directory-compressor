@@ -2,21 +2,7 @@
 
 using namespace std;
 
-#ifdef _WIN32
-#include "win32/make_dir.h"
-string sub_directory = "../../tests/";
-#endif
-
-#ifdef __PYMODULE
-sub_directory = "../tests/";
-#endif
-
-#ifdef unix
-#include "linux/make_dir.h"
-string sub_directory = "../tests/";
-#endif
-
-void directory_generate::from_file(string root_directory_name, string file_string) {
+void directory_generate::from_file(string root_directory_name, string file_string, string location) {
 
     // Read file
     ifstream file(file_string);
@@ -26,7 +12,7 @@ void directory_generate::from_file(string root_directory_name, string file_strin
     file >> json_data;
 
     // Call function to generate 
-    directory_generate::create_generation_tree(root_directory_name, json_data);
+    directory_generate::create_generation_tree(root_directory_name, json_data, location);
 
     // Generate directory tree
     for (size_t p = 0; p < directory_generate::generation_tree.size(); p++) {
@@ -37,10 +23,10 @@ void directory_generate::from_file(string root_directory_name, string file_strin
     
 }
 
-void directory_generate::create_generation_tree(string root_directory_name, json json_data) {
+void directory_generate::create_generation_tree(string root_directory_name, json json_data, string location) {
 
     // Append root directory to generation tree
-    string root_path = sub_directory + root_directory_name;
+    string root_path = location + root_directory_name;
     directory_generate::generation_tree[0] = root_path;
 
     // Call recursive function to walk through JSON tree

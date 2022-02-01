@@ -1,10 +1,10 @@
 #include "include/DG_py.h"
 
 namespace py = pybind11;
-direcory_generate dg;
+directory_generate dg;
 
-void py_generate(std::string directory_name, std::string file_string) {
-    dg.from_file(directory_name, file_string);
+void py_generate(std::string directory_name, std::string file_string, std::string location) {
+    dg.from_file(directory_name, file_string, location);
 };
 
 PYBIND11_MODULE(generate_directory, m) {
