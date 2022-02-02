@@ -96,23 +96,15 @@ bool directory_generate::check_subs(json sub) {
 
 void generate_file::create(const bfs::path &dir_path) {
     
-    // Setup JSON
+    // Init JSON
     json structure;
-    structure["template_name"] = "TEST";
 
-    int count = 0;
-    bfs::directory_iterator end_itr;
-    for ( bfs::directory_iterator itr( dir_path );itr != end_itr; ++itr ) {
-        cout << itr->path() << endl;
-        cout << itr->path().filename() << endl;
 
-        structure["structure"][count] = itr->path().filename().string();;
+    json generated_structure = generate_file::traverse(dir_path, structure);
 
-        cout << count << endl;
+    cout << generated_structure << endl;
 
-        count++;
-    }
-
+    
     ofstream cur_file("../tests/generated_test.json");
     cur_file << structure;
     cur_file.close();
@@ -124,3 +116,39 @@ void generate_file::create(const bfs::path &dir_path) {
     // }
         
 };
+
+json generate_file::traverse(const bfs::path &dir_path, json structure) {
+
+    // Iterate through directory dir_path
+    bfs::directory_iterator end_itr;
+    int count = 0;
+    for ( bfs::directory_iterator itr( dir_path );itr != end_itr; ++itr ) {
+       
+        string cur_dirname = itr->path().filename().string();
+        bfs::path cur_parent = itr->path().parent_path();
+
+        // if 
+        json cur_structure;
+
+        int _count = 0;
+        while (cur_parent.filename().string() != "to_use") {
+            cur_parent = cur_parent.parent_path();
+
+            cur_structure[count]["title"] = cur_dirname;
+
+            _count++;
+        }
+
+        structure[count]["sub"] = cur_structure;
+
+        // If current path is a directory, run again
+        if (!bfs::is_regular_file(itr->path())) {
+            generate_file::traverse(itr->path(), structure);
+        }
+
+        count++;
+    }
+
+    return structure;
+
+}

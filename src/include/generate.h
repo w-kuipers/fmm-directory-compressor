@@ -36,6 +36,8 @@ class directory_generate {
 class generate_file {
     public:
         void create(const bfs::path &search_here);
+    private:
+        json traverse(const bfs::path &dir_path, json structure);
 };
 
 #endif
