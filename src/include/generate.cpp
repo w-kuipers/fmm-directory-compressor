@@ -139,6 +139,8 @@ json generate_file::traverse(const bfs::path &dir_path, json structure) {
             _count++;
         }
 
+        cout << cur_structure << endl;
+
         structure[count]["sub"] = cur_structure;
 
         // If current path is a directory, run again
