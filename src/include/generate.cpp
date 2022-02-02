@@ -1,5 +1,7 @@
 #include "generate.h"
 
+
+// TODO use jsoncpp instead of json.hpp
 void directory_generate::from_file(string root_directory_name, string file_string, string location) {
 
     // Read file
@@ -96,95 +98,63 @@ bool directory_generate::check_subs(json sub) {
 
 void generate_file::create(string dir_path) {
     
-    // Init JSON
-    json structure;
+    
 
-
-    // json generated_structure = generate_file::traverse(dir_path, structure);
-
-    Json::Value generated_structure = generate_file::getDirectoryTreeFromPath(dir_path);
-
-    cout << generated_structure << endl;
+    Json::Value generated_structure = generate_file::traverse(dir_path);
 
     
     ofstream cur_file("../tests/generated_test.json");
     cur_file << generated_structure;
     cur_file.close();
-
-    
-    // directory_iterator it{p};
-    // while (it != directory_iterator{}) {
-    //     cout << *it++ << '\n';
-    // }
         
 };
 
-json generate_file::traverse(const bfs::path &dir_path, json structure) {
 
-    // Iterate through directory dir_path
-    bfs::directory_iterator end_itr;
-    int count = 0;
-    for ( bfs::directory_iterator itr( dir_path );itr != end_itr; ++itr ) {
-       
-        string cur_dirname = itr->path().filename().string();
-        bfs::path cur_parent = itr->path().parent_path();
+// TODO convert filesystem stuff to boost
+Json::Value generate_file::traverse(const string &dir_path) {
 
-        // if 
-        json cur_structure;
+    DIR* dirp;
+    struct dirent *p;
+    dirp = opendir(dir_path.c_str());
 
-        int _count = 0;
-        while (cur_parent.filename().string() != "to_use") {
-            cur_parent = cur_parent.parent_path();
+    Json::Value generated_structure(Json::arrayValue);
 
-            cur_structure[count]["title"] = cur_dirname;
+    // If directory exists loop through it
+    if (dirp) {
+        while ((p = readdir(dirp)) != nullptr){
+            if (strcmp( p->d_name, ".") == 0 || strcmp( p->d_name, "..") == 0) {
+                continue;
+            }
 
-            _count++;
+            // If current iteration is directory
+            if (p->d_type == DT_DIR) {
+
+                // Init JSON
+                Json::Value dir_val;
+
+                // Set JSON data
+                dir_val["type"] = "directory";
+                dir_val["name"] = p->d_name;
+                dir_val["content"] = generate_file::traverse(dir_path + string("/") + string(p->d_name)); // Recursively call function again with current directory
+
+                // Append
+                generated_structure.append(dir_val);
+
+            // If current iteration is file
+            } else if (p->d_type == DT_REG) {
+
+                // Init JSON
+                Json::Value file_val;
+
+                // Set JSON data 
+                file_val["type"] = "file";
+                file_val["name"] = p->d_name;
+
+                // Append
+                generated_structure.append(file_val);
+            }
         }
 
-        cout << cur_structure << endl;
-
-        structure[count]["sub"] = cur_structure;
-
-        // If current path is a directory, run again
-        if (!bfs::is_regular_file(itr->path())) {
-            generate_file::traverse(itr->path(), structure);
-        }
-
-        count++;
     }
-
-    return structure;
-
-}
-
-Json::Value generate_file::getDirectoryTreeFromPath(std::string path){
-
-  DIR* dirp;
-  struct dirent *p;
-  dirp = opendir(path.c_str());
-
-  Json::Value json(Json::arrayValue);
-
-  if(dirp) {
-    while( ( p = readdir(dirp)) != nullptr ){
-      if( strcmp( p->d_name, ".") == 0 || strcmp( p->d_name, "..") == 0){
-        continue;
-      }
-      if( p->d_type == DT_DIR) {
-        Json::Value dir_val;
-        dir_val["type"] = "directory";
-        dir_val["name"] = p->d_name;
-        dir_val["contents"] = getDirectoryTreeFromPath(path + std::string("/") + std::string(p->d_name));
-        json.append(dir_val);
-      } else if ( p->d_type == DT_REG ){
-        Json::Value file_val;
-        file_val["type"] = "file";
-        file_val["name"] = p->d_name;
-        json.append(file_val);
-      }
-    }
-
-  }
-
-  return json; 
+    return generated_structure;
 }

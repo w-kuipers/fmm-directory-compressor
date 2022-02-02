@@ -6,73 +6,21 @@
 				"contents" : 
 				[
 					{
-						"contents" : 
-						[
-							{
-								"contents" : 
-								[
-									{
-										"contents" : [],
-										"name" : "folder1_child1_child2_child1_child3",
-										"type" : "directory"
-									},
-									{
-										"contents" : [],
-										"name" : "folder1_child1_child2_child1_child1",
-										"type" : "directory"
-									},
-									{
-										"contents" : 
-										[
-											{
-												"name" : "moere.cpp",
-												"type" : "file"
-											},
-											{
-												"name" : "deepfile.txt",
-												"type" : "file"
-											}
-										],
-										"name" : "folder1_child1_child2_child1_child2",
-										"type" : "directory"
-									}
-								],
-								"name" : "folder1_child1_child2_child1",
-								"type" : "directory"
-							},
-							{
-								"contents" : 
-								[
-									{
-										"contents" : [],
-										"name" : "folder1_child1_child2_child2_child1",
-										"type" : "directory"
-									},
-									{
-										"contents" : [],
-										"name" : "folder1_child1_child2_child2_child2",
-										"type" : "directory"
-									}
-								],
-								"name" : "folder1_child1_child2_child2",
-								"type" : "directory"
-							}
-						],
-						"name" : "folder1_child1_child2",
+						"contents" : [],
+						"name" : "Session File Backups",
 						"type" : "directory"
 					},
 					{
-						"contents" : [],
-						"name" : "folder1_child1_child1",
-						"type" : "directory"
-					},
-					{
-						"contents" : [],
-						"name" : "folder1_child1_child3",
-						"type" : "directory"
+						"name" : "PRO TOOLS PROJECT.ptx",
+						"type" : "file"
 					}
 				],
-				"name" : "folder1_child1",
+				"name" : "07_Pro-Tools",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "03_Capture-One",
 				"type" : "directory"
 			},
 			{
@@ -80,35 +28,221 @@
 				[
 					{
 						"contents" : [],
-						"name" : "folder1_child2_child2",
-						"type" : "directory"
-					},
-					{
-						"contents" : [],
-						"name" : "folder1_child2_child1",
+						"name" : "OLD",
 						"type" : "directory"
 					}
 				],
-				"name" : "folder1_child2",
+				"name" : "04_Blender",
+				"type" : "directory"
+			},
+			{
+				"contents" : 
+				[
+					{
+						"contents" : [],
+						"name" : "OLD",
+						"type" : "directory"
+					},
+					{
+						"name" : "FILMAGE-PREMIEREPRO-PROJECT-TEMPLATE.prproj",
+						"type" : "file"
+					}
+				],
+				"name" : "01_Premiere",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "06_Lightroom",
+				"type" : "directory"
+			},
+			{
+				"contents" : 
+				[
+					{
+						"contents" : [],
+						"name" : "OLD",
+						"type" : "directory"
+					}
+				],
+				"name" : "05_Photoshop",
+				"type" : "directory"
+			},
+			{
+				"contents" : 
+				[
+					{
+						"name" : "FILMAGE-AFTEREFFECTS-PROJECT-TEMPLATE.aep",
+						"type" : "file"
+					},
+					{
+						"contents" : [],
+						"name" : "OLD",
+						"type" : "directory"
+					}
+				],
+				"name" : "02_AE",
 				"type" : "directory"
 			}
 		],
-		"name" : "folder1",
+		"name" : "02_Projects",
 		"type" : "directory"
 	},
 	{
 		"contents" : 
 		[
 			{
-				"name" : "code.cpp",
-				"type" : "file"
+				"contents" : [],
+				"name" : "05_LuTs",
+				"type" : "directory"
 			},
 			{
-				"name" : "file.txt",
-				"type" : "file"
+				"contents" : [],
+				"name" : "04_Fonts",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "02_Graphics",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "03_Assets",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "01_Logos",
+				"type" : "directory"
 			}
 		],
-		"name" : "folder2",
+		"name" : "04_Artwork",
+		"type" : "directory"
+	},
+	{
+		"contents" : 
+		[
+			{
+				"contents" : [],
+				"name" : "04_Subs",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "03_Clean",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "05_Final",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "01_Previews",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "02_VFX",
+				"type" : "directory"
+			}
+		],
+		"name" : "07_Renders",
+		"type" : "directory"
+	},
+	{
+		"contents" : 
+		[
+			{
+				"contents" : [],
+				"name" : "02_Stock",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "03_Ref",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "04_Proxies",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "01_Delivered",
+				"type" : "directory"
+			}
+		],
+		"name" : "03_Footage",
+		"type" : "directory"
+	},
+	{
+		"contents" : 
+		[
+			{
+				"contents" : [],
+				"name" : "06_Mix",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "03_SFX",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "04_VO",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "01_Delivered",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "05_Exports",
+				"type" : "directory"
+			},
+			{
+				"contents" : 
+				[
+					{
+						"contents" : [],
+						"name" : "LICENCE",
+						"type" : "directory"
+					}
+				],
+				"name" : "02_Music",
+				"type" : "directory"
+			}
+		],
+		"name" : "05_Audio",
+		"type" : "directory"
+	},
+	{
+		"contents" : [],
+		"name" : "00_Imported-Project",
+		"type" : "directory"
+	},
+	{
+		"contents" : 
+		[
+			{
+				"contents" : [],
+				"name" : "01_From-Grading",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "02_To-Grading",
+				"type" : "directory"
+			}
+		],
+		"name" : "06_Grading",
 		"type" : "directory"
 	},
 	{
@@ -119,15 +253,52 @@
 				[
 					{
 						"contents" : [],
-						"name" : "folder3_child1_child",
+						"name" : "03_Storyboard",
+						"type" : "directory"
+					},
+					{
+						"contents" : [],
+						"name" : "02_Shotlist",
+						"type" : "directory"
+					},
+					{
+						"contents" : [],
+						"name" : "01_Script",
 						"type" : "directory"
 					}
 				],
-				"name" : "folder3_child1",
+				"name" : "02_Pre-Production",
+				"type" : "directory"
+			},
+			{
+				"contents" : 
+				[
+					{
+						"contents" : [],
+						"name" : "01_Initial-Briefing",
+						"type" : "directory"
+					},
+					{
+						"contents" : [],
+						"name" : "02_Feedback",
+						"type" : "directory"
+					}
+				],
+				"name" : "01_Briefing",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "04_Subtitles",
+				"type" : "directory"
+			},
+			{
+				"contents" : [],
+				"name" : "03_Translations",
 				"type" : "directory"
 			}
 		],
-		"name" : "folder3",
+		"name" : "01_Docs",
 		"type" : "directory"
 	}
 ]
