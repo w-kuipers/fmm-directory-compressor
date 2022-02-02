@@ -1,1 +1,133 @@
-null
+[
+	{
+		"contents" : 
+		[
+			{
+				"contents" : 
+				[
+					{
+						"contents" : 
+						[
+							{
+								"contents" : 
+								[
+									{
+										"contents" : [],
+										"name" : "folder1_child1_child2_child1_child3",
+										"type" : "directory"
+									},
+									{
+										"contents" : [],
+										"name" : "folder1_child1_child2_child1_child1",
+										"type" : "directory"
+									},
+									{
+										"contents" : 
+										[
+											{
+												"name" : "moere.cpp",
+												"type" : "file"
+											},
+											{
+												"name" : "deepfile.txt",
+												"type" : "file"
+											}
+										],
+										"name" : "folder1_child1_child2_child1_child2",
+										"type" : "directory"
+									}
+								],
+								"name" : "folder1_child1_child2_child1",
+								"type" : "directory"
+							},
+							{
+								"contents" : 
+								[
+									{
+										"contents" : [],
+										"name" : "folder1_child1_child2_child2_child1",
+										"type" : "directory"
+									},
+									{
+										"contents" : [],
+										"name" : "folder1_child1_child2_child2_child2",
+										"type" : "directory"
+									}
+								],
+								"name" : "folder1_child1_child2_child2",
+								"type" : "directory"
+							}
+						],
+						"name" : "folder1_child1_child2",
+						"type" : "directory"
+					},
+					{
+						"contents" : [],
+						"name" : "folder1_child1_child1",
+						"type" : "directory"
+					},
+					{
+						"contents" : [],
+						"name" : "folder1_child1_child3",
+						"type" : "directory"
+					}
+				],
+				"name" : "folder1_child1",
+				"type" : "directory"
+			},
+			{
+				"contents" : 
+				[
+					{
+						"contents" : [],
+						"name" : "folder1_child2_child2",
+						"type" : "directory"
+					},
+					{
+						"contents" : [],
+						"name" : "folder1_child2_child1",
+						"type" : "directory"
+					}
+				],
+				"name" : "folder1_child2",
+				"type" : "directory"
+			}
+		],
+		"name" : "folder1",
+		"type" : "directory"
+	},
+	{
+		"contents" : 
+		[
+			{
+				"name" : "code.cpp",
+				"type" : "file"
+			},
+			{
+				"name" : "file.txt",
+				"type" : "file"
+			}
+		],
+		"name" : "folder2",
+		"type" : "directory"
+	},
+	{
+		"contents" : 
+		[
+			{
+				"contents" : 
+				[
+					{
+						"contents" : [],
+						"name" : "folder3_child1_child",
+						"type" : "directory"
+					}
+				],
+				"name" : "folder3_child1",
+				"type" : "directory"
+			}
+		],
+		"name" : "folder3",
+		"type" : "directory"
+	}
+]

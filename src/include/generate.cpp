@@ -94,19 +94,21 @@ bool directory_generate::check_subs(json sub) {
     return false;
 }
 
-void generate_file::create(const bfs::path &dir_path) {
+void generate_file::create(string dir_path) {
     
     // Init JSON
     json structure;
 
 
-    json generated_structure = generate_file::traverse(dir_path, structure);
+    // json generated_structure = generate_file::traverse(dir_path, structure);
+
+    Json::Value generated_structure = generate_file::getDirectoryTreeFromPath(dir_path);
 
     cout << generated_structure << endl;
 
     
     ofstream cur_file("../tests/generated_test.json");
-    cur_file << structure;
+    cur_file << generated_structure;
     cur_file.close();
 
     
@@ -153,4 +155,36 @@ json generate_file::traverse(const bfs::path &dir_path, json structure) {
 
     return structure;
 
+}
+
+Json::Value generate_file::getDirectoryTreeFromPath(std::string path){
+
+  DIR* dirp;
+  struct dirent *p;
+  dirp = opendir(path.c_str());
+
+  Json::Value json(Json::arrayValue);
+
+  if(dirp) {
+    while( ( p = readdir(dirp)) != nullptr ){
+      if( strcmp( p->d_name, ".") == 0 || strcmp( p->d_name, "..") == 0){
+        continue;
+      }
+      if( p->d_type == DT_DIR) {
+        Json::Value dir_val;
+        dir_val["type"] = "directory";
+        dir_val["name"] = p->d_name;
+        dir_val["contents"] = getDirectoryTreeFromPath(path + std::string("/") + std::string(p->d_name));
+        json.append(dir_val);
+      } else if ( p->d_type == DT_REG ){
+        Json::Value file_val;
+        file_val["type"] = "file";
+        file_val["name"] = p->d_name;
+        json.append(file_val);
+      }
+    }
+
+  }
+
+  return json; 
 }

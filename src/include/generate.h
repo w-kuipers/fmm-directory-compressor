@@ -7,6 +7,8 @@
 #include <string>
 #include <boost/filesystem.hpp>
 #include "json.hpp"
+#include <dirent.h>
+#include <jsoncpp/json/json.h>
 
 
 #ifdef _WIN32
@@ -35,9 +37,10 @@ class directory_generate {
 
 class generate_file {
     public:
-        void create(const bfs::path &search_here);
+        void create(string search_here);
     private:
         json traverse(const bfs::path &dir_path, json structure);
+        Json::Value getDirectoryTreeFromPath(std::string path);
 };
 
 #endif
