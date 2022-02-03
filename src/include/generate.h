@@ -5,7 +5,9 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <string>
+#include <random>
 #include <boost/filesystem.hpp>
+#include <zip.h>
 
 #ifdef _WIN32
 #include "win32/make_dir.h"
