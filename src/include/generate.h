@@ -14,6 +14,8 @@
 #include <json/json.h>
 #endif
 
+#include "win32/zip.cpp"
+
 #ifdef unix
 #include "linux/make_dir.h"
 #include <jsoncpp/json/json.h>

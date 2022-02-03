@@ -136,35 +136,42 @@ Json::Value generate_file::traverse(const bfs::path &dir_path) {
 
 void generate_zip::from_path(string path) {
 
-    // Generate random string
-    static auto& chrs = "0123456789"
-        "abcdefghijklmnopqrstuvwxyz"
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // // Generate random string
+    // static auto& chrs = "0123456789"
+    //     "abcdefghijklmnopqrstuvwxyz"
+    //     "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    thread_local static mt19937 rg{random_device{}()};
-    thread_local static uniform_int_distribution<string::size_type> pick(0, sizeof(chrs) - 2);
+    // thread_local static mt19937 rg{random_device{}()};
+    // thread_local static uniform_int_distribution<string::size_type> pick(0, sizeof(chrs) - 2);
 
-    string s;
+    // string s;
 
-    string::size_type length = 8;
+    // string::size_type length = 8;
 
-    s.reserve(length);
+    // s.reserve(length);
 
-    while(length--)
-        s += chrs[pick(rg)];
+    // while(length--)
+    //     s += chrs[pick(rg)];
 
-    // Create temp directory name and path
-    string temp_directory_name = "FMM_genzipstruct_" + s;
-    const bfs::path temp_directory_path(bfs::temp_directory_path().string() + "/" + temp_directory_name);
+    // // Create temp directory name and path
+    // string temp_directory_name = "FMM_genzipstruct_" + s;
+    // const bfs::path temp_directory_path(bfs::temp_directory_path().string() + "/" + temp_directory_name);
 
-    // Create the directory
-    bfs::create_directory(temp_directory_path);
-
-
+    // // Create the directory
+    // bfs::create_directory(temp_directory_path);
 
 
-    // Remove temp directory
-    bfs::remove_all(temp_directory_path);
+
+
+    // // Remove temp directory
+    // bfs::remove_all(temp_directory_path);
+
+
+
+
+
+
+    zip_directory("../tests/to_use", "../tests/test.zip");
 
     return;
 }
