@@ -8,7 +8,7 @@ void directory_generate::from_file(string root_directory_name, string file_strin
     ifstream file(file_string);
 
     // Parse JSON from file
-    json json_data;
+    Json::Value json_data;
     file >> json_data;
 
     // Call function to generate 
@@ -31,7 +31,7 @@ void directory_generate::from_file(string root_directory_name, string file_strin
     
 }
 
-void directory_generate::create_generation_tree(string root_directory_name, json json_data, string location) {
+void directory_generate::create_generation_tree(string root_directory_name, Json::Value json_data, string location) {
 
     // Append root directory to generation tree
     string root_path = location + root_directory_name;
@@ -43,7 +43,7 @@ void directory_generate::create_generation_tree(string root_directory_name, json
     return;
 }
 
-void directory_generate::traverse(json json_data, string path) {
+void directory_generate::traverse(Json::Value json_data, string path) {
 
     // Loop through sublevel
     for (size_t d = 0; d < json_data.size(); d++) {
@@ -75,7 +75,7 @@ void directory_generate::traverse(json json_data, string path) {
     return;
 }
 
-bool directory_generate::check_subs(json sub) {
+bool directory_generate::check_subs(Json::Value sub) {
 
     // Subs exist if sub is not null
     if (sub != nullptr) {
