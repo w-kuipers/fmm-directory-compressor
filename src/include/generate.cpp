@@ -1,7 +1,5 @@
 #include "generate.h"
 
-
-// TODO use jsoncpp instead of json.hpp
 void directory_generate::from_file(string root_directory_name, string file_string, string location) {
 
     // Read file
@@ -53,7 +51,7 @@ void directory_generate::traverse(Json::Value json_data, string path) {
         string new_path = path + "/" + cur_title;
 
         // Check if current iteration type is file
-        if (json_data[d]["type"].asString() == "directory") {
+        if (json_data[d]["type"] == "directory") {
 
             // Add directory path to generation tree
             directory_generate::generation_tree[directory_generate::generation_tree.size()] = new_path;
@@ -64,7 +62,7 @@ void directory_generate::traverse(Json::Value json_data, string path) {
         }
 
         // Check if current iteration type is file
-        if (json_data[d]["type"].asString() == "file") {
+        if (json_data[d]["type"] == "file") {
 
             // Add file path to file generation tree
             directory_generate::file_generation_tree[directory_generate::file_generation_tree.size()] = new_path;
@@ -74,15 +72,16 @@ void directory_generate::traverse(Json::Value json_data, string path) {
 }
 
 void generate_file::create(const bfs::path &dir_path) {
-    
-    
-    
+
+    // Generate JSON structure by recursively going through the directory    
     Json::Value generated_structure = generate_file::traverse(dir_path);
 
+    // Create JSON root with metadata and the structure appended
     Json::Value structure_root;
     structure_root["template_name"] = "test";
     structure_root["structure"] = generated_structure;
 
+    // Write the JSON tree to a file
     ofstream cur_file("../../tests/generated_test.json");
     cur_file << structure_root;
     cur_file.close();
