@@ -6,22 +6,22 @@ void directory_generate::from_file(string root_directory_name, string file_strin
     ifstream file(file_string);
 
     // Parse JSON from file
-    json json_data;
+    Json::Value json_data;
     file >> json_data;
 
     // Call function to generate 
     directory_generate::create_generation_tree(root_directory_name, json_data, location);
 
     // Generate directory tree
-    for (size_t p = 0; p < directory_generate::generation_tree.size(); p++) {
-        if (!os_sp::make_dir(directory_generate::generation_tree[p])) {
+    for (Json::Value::ArrayIndex p = 0; p < directory_generate::generation_tree.size(); p++) {
+        if (!os_sp::make_dir(directory_generate::generation_tree[p].asString())) {
             return; // Break function if root fails to generate
         }
     }
 
     // Generate files
-    for (size_t fp = 0; fp < directory_generate::file_generation_tree.size(); fp++) {
-        string cur_filename = directory_generate::file_generation_tree[fp];
+    for (Json::Value::ArrayIndex fp = 0; fp < directory_generate::file_generation_tree.size(); fp++) {
+        string cur_filename = directory_generate::file_generation_tree[fp].asString();
         ofstream cur_file(cur_filename);
         cur_file << "temp data"; // TODO get real data
         cur_file.close();
@@ -29,128 +29,107 @@ void directory_generate::from_file(string root_directory_name, string file_strin
     
 }
 
-void directory_generate::create_generation_tree(string root_directory_name, json json_data, string location) {
+void directory_generate::create_generation_tree(string root_directory_name, Json::Value json_data, string location) {
 
     // Append root directory to generation tree
     string root_path = location + root_directory_name;
     directory_generate::generation_tree[0] = root_path;
 
     // Call recursive functions to walk through JSON tree
-    directory_generate::traverse(json_data["structure"]["sub"], root_path); // Handles directories
-    directory_generate::handle_files(json_data["structure"]["content"], root_path); // Handles files
+    directory_generate::traverse(json_data["structure"], root_path);
 
     return;
 }
 
-void directory_generate::traverse(json json_data, string path) {
+void directory_generate::traverse(Json::Value json_data, string path) {
 
     // Loop through sublevel
-    for (size_t d = 0; d < json_data.size(); d++) {
+    for (Json::Value::ArrayIndex d = 0; d < json_data.size(); d++) {
 
-        // Append current path to generation tree
-        string cur_title = json_data[d]["title"];
-        string new_path = path + "/" + cur_title;
-        directory_generate::generation_tree[directory_generate::generation_tree.size()] = new_path;
-
-        // Check if current level has sublevels, if so call the function again
-        if (directory_generate::check_subs(json_data[d]["sub"])) {
-            directory_generate::traverse(json_data[d]["sub"], new_path);
-        }
-
-        // Check if current level has files
-        if (directory_generate::check_subs(json_data[d]["content"])) {
-            directory_generate::handle_files(json_data[d]["content"], new_path);
-        }
-
-    }
-
-    return;
-}
-
-void directory_generate::handle_files(json json_data, string path) {
-
-    cout << json_data << endl;
-    cout << path << endl;
-
-    // Loop through sublevel
-    for (size_t d = 0; d < json_data.size(); d++) {
-
-        // Append current path to file generation tree
-        string cur_title = json_data[d]["title"];
+        // Create new path
+        string cur_title = json_data[d]["title"].asString();
         string new_path = path + "/" + cur_title;
 
-        directory_generate::file_generation_tree[directory_generate::file_generation_tree.size()] = new_path;
-    }
+        // Check if current iteration type is file
+        if (json_data[d]["type"] == "directory") {
 
+            // Add directory path to generation tree
+            directory_generate::generation_tree[directory_generate::generation_tree.size()] = new_path;
+
+            // Check if current level has sublevels, if so call the function again
+            directory_generate::traverse(json_data[d]["content"], new_path);
+
+        }
+
+        // Check if current iteration type is file
+        if (json_data[d]["type"] == "file") {
+
+            // Add file path to file generation tree
+            directory_generate::file_generation_tree[directory_generate::file_generation_tree.size()] = new_path;
+        } 
+    }
     return;
-}
-
-bool directory_generate::check_subs(json sub) {
-
-    // Subs exist if sub is not null
-    if (sub != nullptr) {
-        return true;
-    }
-    return false;
 }
 
 void generate_file::create(const bfs::path &dir_path) {
-    
-    // Init JSON
-    json structure;
 
+    // Generate JSON structure by recursively going through the directory    
+    Json::Value generated_structure = generate_file::traverse(dir_path);
 
-    json generated_structure = generate_file::traverse(dir_path, structure);
+    // Create JSON root with metadata and the structure appended
+    Json::Value structure_root;
+    structure_root["template_name"] = "test";
+    structure_root["structure"] = generated_structure;
 
-    cout << generated_structure << endl;
-
-    
+    // Write the JSON tree to a file
     ofstream cur_file("../tests/generated_test.json");
-    cur_file << structure;
+    cur_file << structure_root;
     cur_file.close();
-
-    
-    // directory_iterator it{p};
-    // while (it != directory_iterator{}) {
-    //     cout << *it++ << '\n';
-    // }
         
 };
 
-json generate_file::traverse(const bfs::path &dir_path, json structure) {
+
+Json::Value generate_file::traverse(const bfs::path &dir_path) {
+
+    // Init JSON
+    Json::Value generated_structure(Json::arrayValue);
 
     // Iterate through directory dir_path
     bfs::directory_iterator end_itr;
-    int count = 0;
-    for ( bfs::directory_iterator itr( dir_path );itr != end_itr; ++itr ) {
-       
-        string cur_dirname = itr->path().filename().string();
-        bfs::path cur_parent = itr->path().parent_path();
+    for (bfs::directory_iterator itr( dir_path );itr != end_itr; ++itr) {
 
-        // if 
-        json cur_structure;
+        // Name of current iteration
+        string cur_name = itr->path().filename().string();
 
-        int _count = 0;
-        while (cur_parent.filename().string() != "to_use") {
-            cur_parent = cur_parent.parent_path();
-
-            cur_structure[count]["title"] = cur_dirname;
-
-            _count++;
-        }
-
-        cout << cur_structure << endl;
-
-        structure[count]["sub"] = cur_structure;
-
-        // If current path is a directory, run again
+        // If current iteration is directory
         if (!bfs::is_regular_file(itr->path())) {
-            generate_file::traverse(itr->path(), structure);
+
+             // Init JSON
+            Json::Value dir_val;
+
+            // Set JSON data
+            dir_val["type"] = "directory";
+            dir_val["title"] = cur_name;
+            dir_val["content"] = generate_file::traverse(dir_path.string() + string("/") + cur_name); // Recursively call function again with current directory
+
+            // Append
+            generated_structure.append(dir_val);
         }
 
-        count++;
+        // If current iteration is file
+        if (bfs::is_regular_file(itr->path())) {
+
+             // Init JSON
+            Json::Value file_val;
+
+            // Set JSON data 
+            file_val["type"] = "file";
+            file_val["title"] = cur_name;
+
+            // Append
+            generated_structure.append(file_val);
+        }
     }
 
-    return structure;
-
+    return generated_structure;
 }
