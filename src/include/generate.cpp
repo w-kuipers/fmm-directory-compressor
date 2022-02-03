@@ -82,7 +82,7 @@ void generate_file::create(const bfs::path &dir_path) {
     structure_root["structure"] = generated_structure;
 
     // Write the JSON tree to a file
-    ofstream cur_file("../../tests/generated_test.json");
+    ofstream cur_file("../tests/generated_test.json");
     cur_file << structure_root;
     cur_file.close();
         
