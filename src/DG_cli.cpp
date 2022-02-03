@@ -4,10 +4,12 @@
 using namespace std;
 directory_generate dg;
 generate_file gf;
+generate_zip gz;
 
 int main() {
 
     string directory_name;
+    string structure_name;
 
     // Some debugging stuff
     #ifdef _WIN32
@@ -28,7 +30,14 @@ int main() {
 
     // dg.from_file(directory_name, file, location);
 
-    gf.create(directory);
+    // gf.create(directory);
+
+    while (structure_name.empty()) {
+        cout << "Please specify a name for the this structure template: ";
+        cin >> structure_name;
+    }
+
+    gz.from_path(directory);
         
     return 0;
 };

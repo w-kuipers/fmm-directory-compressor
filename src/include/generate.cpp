@@ -133,3 +133,9 @@ Json::Value generate_file::traverse(const bfs::path &dir_path) {
 
     return generated_structure;
 }
+
+void generate_zip::from_path(std::string path) {
+
+    cout << bfs::temp_directory_path() << endl;
+    
+}

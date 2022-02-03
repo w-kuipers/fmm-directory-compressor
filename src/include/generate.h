@@ -18,7 +18,7 @@
 #endif
 
 using namespace std;
-namespace bfs =  boost::filesystem;
+namespace bfs = boost::filesystem;
 
 class directory_generate {
     public:
@@ -35,6 +35,11 @@ class generate_file {
         void create(const bfs::path &dir_path);
     private:
         Json::Value traverse(const bfs::path &dir_path);
+};
+
+class generate_zip {
+    public:
+        void from_path(std::string path);
 };
 
 #endif
