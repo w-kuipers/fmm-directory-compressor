@@ -11,9 +11,14 @@ if (WIN32)
 
     include(C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake)
 
-    
+    find_package(Boost COMPONENTS system filesystem REQUIRED)
+    find_package(jsoncpp COMPONENTS system filesystem REQUIRED)
+
+
     add_executable(FMMdirstructuregenerator src/DG_cli.cpp src/include/generate.cpp src/include/win32/make_dir.cpp)
     pybind11_add_module(generate_directory src/DG_py.cpp src/include/generate.cpp src/include/win32/make_dir.cpp)
+
+    target_link_libraries(FMMdirstructuregenerator ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib)
 
 endif (WIN32)
 

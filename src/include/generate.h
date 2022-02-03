@@ -7,16 +7,16 @@
 #include <string>
 #include <boost/filesystem.hpp>
 #include "json.hpp"
-#include <dirent.h>
-#include <jsoncpp/json/json.h>
 
 
 #ifdef _WIN32
 #include "win32/make_dir.h"
+#include <json/json.h>
 #endif
 
 #ifdef unix
 #include "linux/make_dir.h"
+#include <jsoncpp/json/json.h>
 #endif
 
 using namespace nlohmann;
@@ -37,9 +37,9 @@ class directory_generate {
 
 class generate_file {
     public:
-        void create(string dir_path);
+        void create(const bfs::path &dir_path);
     private:
-        Json::Value traverse(const string &dir_path);
+        Json::Value traverse(const bfs::path &dir_path);
 };
 
 #endif

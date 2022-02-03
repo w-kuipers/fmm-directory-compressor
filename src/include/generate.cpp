@@ -104,7 +104,7 @@ bool directory_generate::check_subs(json sub) {
     return false;
 }
 
-void generate_file::create(string dir_path) {
+void generate_file::create(const bfs::path &dir_path) {
     
     
 
@@ -114,58 +114,55 @@ void generate_file::create(string dir_path) {
     structure_root["template_name"] = "test";
     structure_root["structure"] = generated_structure;
 
-    ofstream cur_file("../tests/generated_test.json");
+    ofstream cur_file("../../tests/generated_test.json");
     cur_file << structure_root;
     cur_file.close();
         
 };
 
 
-// TODO convert filesystem stuff to boost
-Json::Value generate_file::traverse(const string &dir_path) {
+Json::Value generate_file::traverse(const bfs::path &dir_path) {
 
-    DIR* dirp;
-    struct dirent *p;
-    dirp = opendir(dir_path.c_str());
-
+    // Init JSON
     Json::Value generated_structure(Json::arrayValue);
 
-    // If directory exists loop through it
-    if (dirp) {
-        while ((p = readdir(dirp)) != nullptr){
-            if (strcmp( p->d_name, ".") == 0 || strcmp( p->d_name, "..") == 0) {
-                continue;
-            }
+    // Iterate through directory dir_path
+    bfs::directory_iterator end_itr;
+    for (bfs::directory_iterator itr( dir_path );itr != end_itr; ++itr) {
 
-            // If current iteration is directory
-            if (p->d_type == DT_DIR) {
+        // Name of current iteration
+        string cur_name = itr->path().filename().string();
 
-                // Init JSON
-                Json::Value dir_val;
+        // If current iteration is directory
+        if (!bfs::is_regular_file(itr->path())) {
 
-                // Set JSON data
-                dir_val["type"] = "directory";
-                dir_val["title"] = p->d_name;
-                dir_val["content"] = generate_file::traverse(dir_path + string("/") + string(p->d_name)); // Recursively call function again with current directory
+             // Init JSON
+            Json::Value dir_val;
 
-                // Append
-                generated_structure.append(dir_val);
+            // Set JSON data
+            dir_val["type"] = "directory";
+            dir_val["title"] = cur_name;
+            dir_val["content"] = generate_file::traverse(dir_path.string() + string("/") + cur_name); // Recursively call function again with current directory
 
-            // If current iteration is file
-            } else if (p->d_type == DT_REG) {
-
-                // Init JSON
-                Json::Value file_val;
-
-                // Set JSON data 
-                file_val["type"] = "file";
-                file_val["name"] = p->d_name;
-
-                // Append
-                generated_structure.append(file_val);
-            }
+            // Append
+            generated_structure.append(dir_val);
         }
 
+
+        // If current iteration is file
+        if (bfs::is_regular_file(itr->path())) {
+
+             // Init JSON
+            Json::Value file_val;
+
+            // Set JSON data 
+            file_val["type"] = "file";
+            file_val["name"] = cur_name;
+
+            // Append
+            generated_structure.append(file_val);
+        }
     }
+
     return generated_structure;
 }

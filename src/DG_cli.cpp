@@ -21,14 +21,14 @@ int main() {
     #endif
     
 
-    cout << "Please specify a name for the root directory (default=templatename): ";
-    cin >> directory_name;
+    // cout << "Please specify a name for the root directory (default=templatename): ";
+    // cin >> directory_name;
 
-    dg.from_file(directory_name, file, location);
+    // dg.from_file(directory_name, file, location);
 
-    // string directory = "../tests/to_use";
+    string directory = "../../tests/to_use";
 
-    // gf.create(directory);
+    gf.create(directory);
         
     return 0;
 };
