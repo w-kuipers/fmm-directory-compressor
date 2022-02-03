@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <string>
 #include <boost/filesystem.hpp>
-#include "json.hpp"
+// #include "json.hpp"
 
 
 #ifdef _WIN32
@@ -19,7 +19,7 @@
 #include <jsoncpp/json/json.h>
 #endif
 
-using namespace nlohmann;
+// using namespace nlohmann;
 using namespace std;
 namespace bfs =  boost::filesystem;
 
@@ -28,8 +28,8 @@ class directory_generate {
         void from_file(std::string root_directory_name, std::string file, std::string location);
         void create_generation_tree(std::string directory_name, Json::Value json_data, std::string location);
     private:
-        json generation_tree;
-        json file_generation_tree;
+        Json::Value generation_tree;
+        Json::Value file_generation_tree;
         bool check_subs(Json::Value level);
         void traverse(Json::Value json_data, std::string path);
 };
