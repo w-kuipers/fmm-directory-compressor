@@ -1,0 +1,46 @@
+{
+	"structure" : 
+	[
+		{
+			"content" : 
+			[
+				{
+					"content" : 
+					[
+						{
+							"title" : "FILMAGE-PREMIEREPRO-PROJECT-TEMPLATE.prproj",
+							"type" : "file"
+						}
+					],
+					"title" : "01_Premiere",
+					"type" : "directory"
+				},
+				{
+					"content" : 
+					[
+						{
+							"title" : "FILMAGE-AFTEREFFECTS-PROJECT-TEMPLATE.aep",
+							"type" : "file"
+						}
+					],
+					"title" : "02_AE",
+					"type" : "directory"
+				},
+				{
+					"content" : 
+					[
+						{
+							"title" : "PRO TOOLS PROJECT.ptx",
+							"type" : "file"
+						}
+					],
+					"title" : "07_Pro-Tools",
+					"type" : "directory"
+				}
+			],
+			"title" : "02_Projects",
+			"type" : "directory"
+		}
+	],
+	"template_name" : "test"
+}
