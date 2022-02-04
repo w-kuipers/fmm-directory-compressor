@@ -25,6 +25,8 @@ endif (WIN32)
 
 ## Linux and Unix compiling
 if (UNIX)
+
+    include(lib/vcpkg/scripts/buildsystems/vcpkg.cmake)
     
     find_package(Boost COMPONENTS system filesystem REQUIRED)
     find_package(jsoncpp CONFIG REQUIRED)
