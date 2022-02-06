@@ -36,8 +36,8 @@ if (UNIX)
     add_executable(FMMdirstructuregenerator src/DG_cli.cpp src/include/generate.cpp src/include/linux/make_dir.cpp)
     pybind11_add_module(generate_directory src/DG_py.cpp src/include/generate.cpp src/include/linux/make_dir.cpp)
 
-    target_link_libraries(generate_directory PRIVATE ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib jsoncpp_object JsonCpp::JsonCpp libzip::zip)
-    target_link_libraries(FMMdirstructuregenerator ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib jsoncpp_object JsonCpp::JsonCpp libzip::zip)
+    target_link_libraries(generate_directory PRIVATE ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib libzip::zip)
+    target_link_libraries(FMMdirstructuregenerator ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib libzip::zip)
     
 endif (UNIX)
 
