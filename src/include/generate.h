@@ -5,9 +5,9 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <string>
-#include <random>
 #include <boost/filesystem.hpp>
-#include "compress.cpp"
+#include "compress.h"
+#include "common.h"
 
 #ifdef _WIN32
 #include "win32/make_dir.h"
@@ -34,14 +34,14 @@ class directory_generate {
 
 class generate_file {
     public:
-        void create(const bfs::path &dir_path);
+        void create(const bfs::path &dir_path, const string dst_path);
     private:
         Json::Value traverse(const bfs::path &dir_path);
 };
 
 class generate_zip {
     public:
-        void from_path(std::string path);
+        void from_path(std::string path, std::string name, std::string location);
 };
 
 #endif

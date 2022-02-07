@@ -37,7 +37,7 @@ int main() {
         cin >> structure_name;
     }
 
-    gz.from_path(directory);
+    gz.from_path(directory, structure_name, "../../tests/fpstest/");
         
     return 0;
 };

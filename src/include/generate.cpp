@@ -71,7 +71,7 @@ void directory_generate::traverse(Json::Value json_data, string path) {
     return;
 }
 
-void generate_file::create(const bfs::path &dir_path) {
+void generate_file::create(const bfs::path &dir_path, const string dst_path) {
 
     // Generate JSON structure by recursively going through the directory    
     Json::Value generated_structure = generate_file::traverse(dir_path);
@@ -82,7 +82,7 @@ void generate_file::create(const bfs::path &dir_path) {
     structure_root["structure"] = generated_structure;
 
     // Write the JSON tree to a file
-    ofstream cur_file("../../tests/generated_test.json");
+    ofstream cur_file(dst_path + "/structure.json");
     cur_file << structure_root;
     cur_file.close();
         
@@ -134,44 +134,44 @@ Json::Value generate_file::traverse(const bfs::path &dir_path) {
     return generated_structure;
 }
 
-void generate_zip::from_path(string path) {
+void generate_zip::from_path(string path, string name, string location) {
 
-    // // Generate random string
-    // static auto& chrs = "0123456789"
-    //     "abcdefghijklmnopqrstuvwxyz"
-    //     "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // Check if filename is available
+    if (bfs::exists(location + name + ".fps")) {
+        cout << "File already exists!" << endl;
+        return;
+    }
 
-    // thread_local static mt19937 rg{random_device{}()};
-    // thread_local static uniform_int_distribution<string::size_type> pick(0, sizeof(chrs) - 2);
+    // Check if location is available
+    if (!bfs::exists(location)) {
+        cout << "Destination directory not found!" << endl;
+        return;
+    }
 
-    // string s;
+    // Create random ID
+    random_generation random;
+    string s = random.str();
 
-    // string::size_type length = 8;
+    // Create temp directory name and path
+    string temp_directory_name = "FMM_genzipstruct_" + s;
+    const string temp_directory_path = bfs::temp_directory_path().string() + "/" + temp_directory_name;
 
-    // s.reserve(length);
+    // Create the directory
+    bfs::create_directory(temp_directory_path);
 
-    // while(length--)
-    //     s += chrs[pick(rg)];
+    // Copy files to temp directory
+    compress_directory cp;
+    cp.gather_files(path, temp_directory_path);
 
-    // // Create temp directory name and path
-    // string temp_directory_name = "FMM_genzipstruct_" + s;
-    // const bfs::path temp_directory_path(bfs::temp_directory_path().string() + "/" + temp_directory_name);
+    // Generate JSON structure file
+    generate_file gf;
+    gf.create(path, temp_directory_path);
 
-    // // Create the directory
-    // bfs::create_directory(temp_directory_path);
+    // Compress the directory into a .FPS file
+    cp.compress(temp_directory_path, location + name + ".fps");
 
-
-
-
-    // // Remove temp directory
-    // bfs::remove_all(temp_directory_path);
-
-
-
-
-
-
-    zip_directory("../../tests/to_use", "../../tests/test.fps");
+    // Remove temp directory
+    bfs::remove_all(temp_directory_path);
 
     return;
 }
