@@ -171,7 +171,7 @@ void generate_zip::from_path(string path) {
 
 
 
-    zip_directory("../tests/to_use", "../tests/test.zip");
+    zip_directory("../../tests/to_use", "../../tests/test.fps");
 
     return;
 }

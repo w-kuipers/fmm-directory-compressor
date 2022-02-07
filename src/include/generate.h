@@ -7,14 +7,12 @@
 #include <string>
 #include <random>
 #include <boost/filesystem.hpp>
-#include <zip.h>
+#include "compress.cpp"
 
 #ifdef _WIN32
 #include "win32/make_dir.h"
 #include <json/json.h>
 #endif
-
-#include "win32/zip.cpp"
 
 #ifdef unix
 #include "linux/make_dir.h"
