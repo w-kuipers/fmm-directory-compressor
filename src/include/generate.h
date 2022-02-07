@@ -34,8 +34,9 @@ class directory_generate {
 
 class generate_file {
     public:
-        void create(const bfs::path &dir_path, const string dst_path);
+        Json::Value create(const bfs::path &dir_path, const string dst_path);
     private:
+        Json::Value file_array;
         Json::Value traverse(const bfs::path &dir_path);
 };
 

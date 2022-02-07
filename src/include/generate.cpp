@@ -66,15 +66,15 @@ void directory_generate::traverse(Json::Value json_data, string path) {
 
             // Add file path to file generation tree
             directory_generate::file_generation_tree[directory_generate::file_generation_tree.size()] = new_path;
-        } 
+        }
     }
     return;
 }
 
-void generate_file::create(const bfs::path &dir_path, const string dst_path) {
+Json::Value generate_file::create(const bfs::path &dir_path, const string dst_path) {
 
-    // Generate JSON structure by recursively going through the directory    
-    Json::Value generated_structure = generate_file::traverse(dir_path);
+    // Generate JSON structure by recursively going through the directory
+    Json::Value generated_structure = generate_file::traverse(dir_path); // File array is defined in global class scope
 
     // Create JSON root with metadata and the structure appended
     Json::Value structure_root;
@@ -85,7 +85,9 @@ void generate_file::create(const bfs::path &dir_path, const string dst_path) {
     ofstream cur_file(dst_path + "/structure.json");
     cur_file << structure_root;
     cur_file.close();
-        
+
+    // Return the file array
+    return generate_file::file_array;
 };
 
 
@@ -119,15 +121,25 @@ Json::Value generate_file::traverse(const bfs::path &dir_path) {
         // If current iteration is file
         if (bfs::is_regular_file(itr->path())) {
 
-             // Init JSON
+            // Random ID
+            random_generation random;
+            string file_id = random.str();
+
+            // Init JSON
             Json::Value file_val;
+            Json::Value id_val;
 
             // Set JSON data 
             file_val["type"] = "file";
             file_val["title"] = cur_name;
+            file_val["id"] = file_id;
+
+            id_val["path"] = itr->path().string();
+            id_val["id"] = file_id;
 
             // Append
             generated_structure.append(file_val);
+            generate_file::file_array.append(id_val);
         }
     }
 
@@ -159,15 +171,23 @@ void generate_zip::from_path(string path, string name, string location) {
     // Create the directory
     bfs::create_directory(temp_directory_path);
 
-    // Copy files to temp directory
-    compress_directory cp;
-    cp.gather_files(path, temp_directory_path);
-
     // Generate JSON structure file
     generate_file gf;
-    gf.create(path, temp_directory_path);
+    Json::Value file_array = gf.create(path, temp_directory_path); // Also returns file_array
+
+    cout << file_array << endl;
+
+    // Copy files to TEMP directory
+    for (Json::Value::ArrayIndex f = 0; f < file_array.size(); f++) {
+
+        ifstream src(file_array[f]["path"].asString(), ios::binary);
+        ofstream dst(temp_directory_path + "/" + file_array[f]["id"].asString(), ios::binary);
+
+        dst << src.rdbuf();
+    }
 
     // Compress the directory into a .FPS file
+    compress_directory cp;
     cp.compress(temp_directory_path, location + name + ".fps");
 
     // Remove temp directory
