@@ -2,6 +2,16 @@
 
 void directory_generate::from_file(string root_directory_name, string file_string, string location) {
 
+    // check if source file and dst directory exist
+    if (!bfs::exists(file_string)) {
+        std::cout << "Error: Source file does not exist!\n";
+        return;
+    }
+    if (!bfs::exists(location)) {
+        std::cout << "Error: Desination directory does not exist!\n";
+        return;
+    }
+
     decompress_archive da;
 
     // Decompress JSON structure file
@@ -192,15 +202,21 @@ Json::Value generate_file::traverse(const bfs::path &dir_path) {
 
 void generate_zip::from_path(string path, string name, string location) {
 
+    // Check if source directory exists
+    if (!bfs::exists(path)) {
+        cout << "Error: Source directory not found!\n";
+        return;
+    }
+
     // Check if filename is available
     if (bfs::exists(location + "/" + name + ".fps")) {
-        cout << "File already exists!" << endl;
+        cout << "Error: File already exists!\n";
         return;
     }
 
     // Check if location is available
     if (!bfs::exists(location)) {
-        cout << "Destination directory not found!" << endl;
+        cout << "Error: Destination directory not found!\n";
         return;
     }
 

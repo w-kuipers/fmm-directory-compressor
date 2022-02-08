@@ -10,8 +10,6 @@ int main(int argc, char** argv) {
     // Handle args
     for (int a = 2; a < argc; a++) {
 
-        cout << argv[a] << endl;
-
         // Deal with long paths (windows..)
         if (string(argv[a]) == "--skip-long-paths") {
             SKIPLONGPATHS = true;
@@ -35,18 +33,23 @@ int main(int argc, char** argv) {
 
         gz.from_path(argv[2], structure_name, argv[3]);
     }
+    else if (string(argv[1]) == "decompress-directory") {
+        if (argc < 4) {
+            cerr << "\nError: compress-directory takes 2 arguments (.FPS file, dst)\n";
+            return 1;
+        }
 
-    // dg.from_file(directory_name, argv[2], argv[2]);
-   
+        std::string directory_name;
 
-    // gf.create(directory);
+        cout << "Please specify a name for the root directory (default=templatename): ";
+        cin >> directory_name;
 
-    // while (structure_name.empty()) {
-    //     cout << "Please specify a name for the this structure template: ";
-    //     cin >> structure_name;
-    // }
-
-    // gz.from_path(directory, structure_name, "../tests/fpstest/");
+        dg.from_file(directory_name, argv[2], argv[3]);
+    }
+    else {
+        cerr << "\nError: program " + string(argv[1]) + " does not exist\n";
+        return 1;
+    }
         
     return 0;
 };
