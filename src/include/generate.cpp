@@ -60,7 +60,7 @@ void directory_generate::from_file(string root_directory_name, string file_strin
 void directory_generate::create_generation_tree(string root_directory_name, Json::Value json_data, string location) {
 
     // Append root directory to generation tree
-    string root_path = location + root_directory_name;
+    string root_path = location + "/" + root_directory_name + "/";
     directory_generate::generation_tree[0] = root_path;
 
     // Call recursive functions to walk through JSON tree
