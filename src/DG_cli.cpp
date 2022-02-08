@@ -24,8 +24,8 @@ int main(int argc, char** argv) {
 
     #ifdef unix
     string file = "../tests/generated_test.json";
-    string location = "../tests/generated_tests/";
-    string directory = "../tests/to_use";
+    string location = "../tests/";
+    string directory = "/home/wibo/Documents/PROTO";
     #endif
     
 
@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     //     cin >> structure_name;
     // }
 
-    // gz.from_path(directory, structure_name, "../../tests/fpstest/");
+    gz.from_path(directory, structure_name, "../tests/fpstest/");
         
     return 0;
 };
