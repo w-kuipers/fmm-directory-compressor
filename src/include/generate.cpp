@@ -230,7 +230,7 @@ void generate_zip::from_path(string path, string name, string location) {
 
     // Compress the directory into a .FPS file
     compress_directory cp;
-    cp.compress(temp_directory_path, location + name + ".fps");
+    cp.compress(temp_directory_path, location + "/" + name + ".fps");
 
     // Remove temp directory
     bfs::remove_all(temp_directory_path);

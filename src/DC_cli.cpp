@@ -3,41 +3,41 @@
 int main(int argc, char** argv) {
 
     if (argc < 2) {
-        cerr << "No arguments where given";
+        cerr << "\nError: No arguments where given\n";
         return 1;
     }
 
     // Handle args
-    for (int a = 1; a < argc; a++) {
+    for (int a = 2; a < argc; a++) {
+
+        cout << argv[a] << endl;
 
         // Deal with long paths (windows..)
         if (string(argv[a]) == "--skip-long-paths") {
             SKIPLONGPATHS = true;
-            cout << "Skipping any path that is larger than 260 characters" << endl;
+            cout << "Skipping any path that is larger than 260 characters\n";
         }
     }
 
-    string directory_name;
-    string structure_name;
+    // Run the right program
+    if (string(argv[1]) == "compress-directory") {
+        if (argc < 4) {
+            cerr << "\nError: compress-directory takes 2 arguments (src, dst)\n";
+            return 1;
+        }
 
-    // Some debugging stuff
-    #ifdef _WIN32
-    string file = "../../tests/pythonTests/Pythontest.fps";
-    string location = "../../tests/generated_tests/";
-    string directory = "Z:/01_PROJECTS/192755_Toneelgroep-Oostpool/2112130_Toneelgroep-Oostpool_Edward-II-Interviews";
-    #endif
+        std::string structure_name;
 
-    #ifdef unix
-    string file = "../tests/fpstest/test.fps";
-    string location = "../tests/generated_tests";
-    string directory = "/home/wibo/Documents/PROTO";
-    #endif
-    
+        while (structure_name.empty()) {
+            cout << "Please specify a name for the this structure template: ";
+            cin >> structure_name;
+        }
 
-    cout << "Please specify a name for the root directory (default=templatename): ";
-    cin >> directory_name;
+        gz.from_path(argv[2], structure_name, argv[3]);
+    }
 
-    dg.from_file(directory_name, file, location);
+    // dg.from_file(directory_name, argv[2], argv[2]);
+   
 
     // gf.create(directory);
 
