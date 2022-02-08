@@ -82,7 +82,7 @@ std::string decompress_archive::decompress(const char *file_string, const char *
 	
 }
 
-long long decompress_archive::decompress_bin(const char *file_string, const char *to_fetch) {
+void decompress_archive::decompress_bin(const char *file_string, const char *to_fetch, std::string location) {
 
 	// Definitions
     int err;
@@ -118,7 +118,15 @@ long long decompress_archive::decompress_bin(const char *file_string, const char
 		}
 
 		sum = 0;
-		fd = open(sb.name, O_RDWR | O_TRUNC | O_CREAT, 0644); // Windows might need O_BINARY
+
+		// Open a file in specified location
+		#ifdef _WIN32
+		fd = open((location + "/" + sb.name).c_str(), O_RDWR | O_TRUNC | O_CREAT | O_BINARY, 0644); // Windows needs O_BINARY
+		#endif
+		#ifdef unix
+		fd = open((location + "/" + sb.name).c_str(), O_RDWR | O_TRUNC | O_CREAT, 0644);
+		#endif
+		
 		if (fd < 0) {
 			fprintf(stderr, "boese, boese\n");
 			exit(101);
@@ -135,8 +143,6 @@ long long decompress_archive::decompress_bin(const char *file_string, const char
 		close(fd);
 		zip_fclose(zf);
 
-		return sum;
-
 	}
 	else {
 		printf("File[%s] Line[%d]\n", __FILE__, __LINE__);
@@ -152,27 +158,5 @@ long long decompress_archive::decompress_bin(const char *file_string, const char
         exit(1);
     }
 
-	return sum;
-
-    // // Search for the structure.json file
-    // const char *name = to_fetch;
-    // struct zip_stat st;
-    // zip_stat_init(&st);
-    // zip_stat(z, name, 0, &st);
-
-    // // Allocate memory for JSON file
-    // struct contents = new struct[st.size];
-
-    // // Read the compressed structure file
-    // zip_file *f = zip_fopen(z, name, 0);
-    // zip_fread(f, contents, st.size);
-    // zip_fclose(f);
-    // zip_close(z);
-	// struct read_data = contents;
-
-    // // Delete allocated memory
-    // delete[] contents;
-
-	// return read_data;
-	
+	return;	
 }

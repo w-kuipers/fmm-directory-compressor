@@ -4,8 +4,8 @@ void directory_generate::from_file(string root_directory_name, string file_strin
 
     decompress_archive da;
 
+    // Decompress JSON structure file
     string fetched_structure_raw = da.decompress(file_string.c_str(), "structure.json");
-
 
     // Convert data to JSON
     Json::Value fetched_structure;   
@@ -29,6 +29,13 @@ void directory_generate::from_file(string root_directory_name, string file_strin
         }
     }
 
+    // Create directory in user temp location
+    random_generation random; 
+    string s = random.str(); // Create random ID
+    string temp_directory_name = "FMM_decompress_" + s;
+    const string temp_directory_path = bfs::temp_directory_path().string() + "/" + temp_directory_name;
+    bfs::create_directory(temp_directory_path); // Create the directory
+
     // Generate files
     for (Json::Value::ArrayIndex fp = 0; fp < directory_generate::file_generation_tree.size(); fp++) {
 
@@ -37,13 +44,16 @@ void directory_generate::from_file(string root_directory_name, string file_strin
         string cur_id = directory_generate::file_generation_tree[fp]["id"].asString();
 
         // Fetch file from zip archive
-        long long file_data = da.decompress_bin(file_string.c_str(), cur_id.c_str());
+        da.decompress_bin(file_string.c_str(), cur_id.c_str(), temp_directory_path);
 
+        ifstream src(temp_directory_path + "/" + cur_id, ios::binary);
+        ofstream dst(cur_path, ios::binary);
 
-        ofstream cur_file(cur_path);
-        cur_file << file_data; // TODO get real data
-        cur_file.close();
+        dst << src.rdbuf();
     }
+
+    // Remove temp directory
+    bfs::remove_all(temp_directory_path);
     
 }
 

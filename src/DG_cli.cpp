@@ -3,14 +3,12 @@
 int main(int argc, char** argv) {
 
     // Handle args
-    if (argc == 2) {
-        for (int a = 0; a < argc; a++) {
+    for (int a = 0; a < argc; a++) {
 
-            // Deal with long paths (windows..)
-            if (string(argv[a]) == "--skip-long-paths") {
-                SKIPLONGPATHS = true;
-                cout << "Skipping any path that is larger than 260 characters" << endl;
-            }
+        // Deal with long paths (windows..)
+        if (string(argv[a]) == "--skip-long-paths") {
+            SKIPLONGPATHS = true;
+            cout << "Skipping any path that is larger than 260 characters" << endl;
         }
     }
 
