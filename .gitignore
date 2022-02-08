@@ -8,4 +8,5 @@ venv
 /lib/*
 !/lib/.gitkeep 
 
-/tests/fpstests/*
+/tests/fpstest/*
+/tests/pythonTests/*

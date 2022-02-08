@@ -15,7 +15,7 @@ int main() {
     #ifdef _WIN32
     string file = "../../tests/generated_test.json";
     string location = "../../tests/";
-    string directory = "../../tests/to_use";
+    string directory = "Z:/01_PROJECTS/192755_Toneelgroep-Oostpool/2112130_Toneelgroep-Oostpool_Edward-II-Interviews";
     #endif
 
     #ifdef unix
