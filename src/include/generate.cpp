@@ -188,8 +188,6 @@ void generate_zip::from_path(string path, string name, string location) {
     generate_file gf;
     Json::Value file_array = gf.create(path, temp_directory_path); // Also returns file_array
 
-    cout << file_array << endl;
-
     // Copy files to TEMP directory
     for (Json::Value::ArrayIndex f = 0; f < file_array.size(); f++) {
 
