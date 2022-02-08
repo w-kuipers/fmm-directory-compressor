@@ -100,6 +100,19 @@ Json::Value generate_file::traverse(const bfs::path &dir_path) {
     bfs::directory_iterator end_itr;
     for (bfs::directory_iterator itr( dir_path );itr != end_itr; ++itr) {
 
+        if (SKIPLONGPATHS == true) {
+            if (itr->path().string().size() > 260) {
+                continue;
+            }
+        }
+        else {
+            if (itr->path().string().size() > 260) {
+                cerr << "Encountered a path that is larger than 260 characters." << endl;
+                exit(0);
+            }
+        }
+    
+
         // Name of current iteration
         string cur_name = itr->path().filename().string();
 
@@ -149,7 +162,7 @@ Json::Value generate_file::traverse(const bfs::path &dir_path) {
 void generate_zip::from_path(string path, string name, string location) {
 
     // Check if filename is available
-    if (bfs::exists(location + name + ".fps")) {
+    if (bfs::exists(location + "/" + name + ".fps")) {
         cout << "File already exists!" << endl;
         return;
     }

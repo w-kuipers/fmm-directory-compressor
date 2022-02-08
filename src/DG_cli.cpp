@@ -1,12 +1,14 @@
-#include "include/generate.h"
+#include "include/DG_cli.h"
 
-// Namespace
-using namespace std;
-directory_generate dg;
-generate_file gf;
-generate_zip gz;
+int main(int argc, char** argv) {
 
-int main() {
+    // Handle args
+    for (int a = 0; a < argc; a++) {
+        if (string(argv[a]) == "--skip-long-paths") {
+            SKIPLONGPATHS = true;
+            cout << "Skipping any path that is larger than 260 characters" << endl;
+        }
+    }
 
     string directory_name;
     string structure_name;
