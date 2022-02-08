@@ -14,7 +14,6 @@ if (WIN32)
     find_package(libzip CONFIG REQUIRED)
     find_package(pybind11 CONFIG REQUIRED)
 
-
     add_executable(FMMdirstructuregenerator src/DG_cli.cpp src/include/generate.cpp src/include/win32/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
     pybind11_add_module(generate_directory src/DG_py.cpp src/include/generate.cpp src/include/win32/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
 

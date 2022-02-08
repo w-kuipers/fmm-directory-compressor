@@ -53,3 +53,126 @@ void compress_directory::compress(const std::string& input_dir, const std::strin
 	// Close the compressed file
 	zip_close(zipper);
 }
+
+std::string decompress_archive::decompress(const char *file_string, const char *to_fetch) {
+	// Open the FPS archive
+    int err = 0;
+    zip *z = zip_open(file_string, 0, &err);
+
+    // Search for the structure.json file
+    const char *name = to_fetch;
+    struct zip_stat st;
+    zip_stat_init(&st);
+    zip_stat(z, name, 0, &st);
+
+    // Allocate memory for JSON file
+    char *contents = new char[st.size];
+
+    // Read the compressed structure file
+    zip_file *f = zip_fopen(z, name, 0);
+    zip_fread(f, contents, st.size);
+    zip_fclose(f);
+    zip_close(z);
+	std::string read_data = contents;
+
+    // Delete allocated memory
+    delete[] contents;
+
+	return read_data;
+	
+}
+
+long long decompress_archive::decompress_bin(const char *file_string, const char *to_fetch) {
+
+	// Definitions
+    int err;
+    struct zip *za;
+	struct zip_file *zf;
+	char buf[100];
+	struct zip_stat sb;
+	zip_int64_t len;
+	int fd;
+	long long sum;
+	
+	
+	// Open archive
+	if ((za = zip_open(file_string, 0, &err)) == NULL) {
+		zip_error_to_str(buf, sizeof(buf), err, errno);
+        fprintf(stderr, "Can't open zip archive `%s': %s\n",
+            file_string, buf);
+       	exit(1);
+	}
+
+	if (zip_stat(za, to_fetch, 0, &sb) == 0) {
+
+		// Get name of current iteration
+		len = strlen(sb.name);
+
+		std::cout << sb.name << std::endl;
+
+
+		zf = zip_fopen(za, to_fetch, 0);
+		if (!zf) {
+			fprintf(stderr, "boese, boese\n");
+			exit(100);
+		}
+
+		sum = 0;
+		fd = open(sb.name, O_RDWR | O_TRUNC | O_CREAT | O_BINARY, 0644);
+		if (fd < 0) {
+			fprintf(stderr, "boese, boese\n");
+			exit(101);
+		}
+		while (sum != sb.size) {
+			len = zip_fread(zf, buf, 100);
+			if (len < 0) {
+				fprintf(stderr, "boese, boese\n");
+				exit(102);
+			}
+			write(fd, buf, len);
+			sum += len;
+		}
+		close(fd);
+		zip_fclose(zf);
+
+		return sum;
+
+	}
+	else {
+		printf("File[%s] Line[%d]\n", __FILE__, __LINE__);
+	}
+
+	// for (int i = 0; i < zip_get_num_entries(za, 0); i++) {
+		
+	// }
+
+	// Close archive
+	if (zip_close(za) == -1) {
+        fprintf(stderr, "Can't close zip archive `%s'\n", file_string);
+        exit(1);
+    }
+
+	return sum;
+
+    // // Search for the structure.json file
+    // const char *name = to_fetch;
+    // struct zip_stat st;
+    // zip_stat_init(&st);
+    // zip_stat(z, name, 0, &st);
+
+    // // Allocate memory for JSON file
+    // struct contents = new struct[st.size];
+
+    // // Read the compressed structure file
+    // zip_file *f = zip_fopen(z, name, 0);
+    // zip_fread(f, contents, st.size);
+    // zip_fclose(f);
+    // zip_close(z);
+	// struct read_data = contents;
+
+    // // Delete allocated memory
+    // delete[] contents;
+
+	// return read_data;
+	
+}

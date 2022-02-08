@@ -10,3 +10,4 @@ venv
 
 /tests/fpstest/*
 /tests/pythonTests/*
+/tests/generated_tests/*

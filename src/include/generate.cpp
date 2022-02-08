@@ -2,15 +2,24 @@
 
 void directory_generate::from_file(string root_directory_name, string file_string, string location) {
 
-    // Read file
-    ifstream file(file_string);
+    decompress_archive da;
 
-    // Parse JSON from file
-    Json::Value json_data;
-    file >> json_data;
+    string fetched_structure_raw = da.decompress(file_string.c_str(), "structure.json");
+
+    // Convert data to JSON
+    Json::Value fetched_structure;   
+    Json::Reader reader;
+
+    // Parse process
+    bool parse_success = reader.parse(fetched_structure_raw, fetched_structure);
+    if (!parse_success) {
+        cout << "Failed to parse"
+               << reader.getFormattedErrorMessages();
+        exit(0);
+    }
 
     // Call function to generate 
-    directory_generate::create_generation_tree(root_directory_name, json_data, location);
+    directory_generate::create_generation_tree(root_directory_name, fetched_structure, location);
 
     // Generate directory tree
     for (Json::Value::ArrayIndex p = 0; p < directory_generate::generation_tree.size(); p++) {
@@ -21,9 +30,17 @@ void directory_generate::from_file(string root_directory_name, string file_strin
 
     // Generate files
     for (Json::Value::ArrayIndex fp = 0; fp < directory_generate::file_generation_tree.size(); fp++) {
-        string cur_filename = directory_generate::file_generation_tree[fp].asString();
-        ofstream cur_file(cur_filename);
-        cur_file << "temp data"; // TODO get real data
+
+        // Get file path and id
+        string cur_path = directory_generate::file_generation_tree[fp]["path"].asString();
+        string cur_id = directory_generate::file_generation_tree[fp]["id"].asString();
+
+        // Fetch file from zip archive
+        long long file_data = da.decompress_bin(file_string.c_str(), cur_id.c_str());
+
+
+        ofstream cur_file(cur_path);
+        cur_file << file_data; // TODO get real data
         cur_file.close();
     }
     
@@ -64,7 +81,10 @@ void directory_generate::traverse(Json::Value json_data, string path) {
         if (json_data[d]["type"] == "file") {
 
             // Add file path to file generation tree
-            directory_generate::file_generation_tree[directory_generate::file_generation_tree.size()] = new_path;
+            Json::Value cur_file_tree;
+            cur_file_tree["path"] = new_path;
+            cur_file_tree["id"] = json_data[d]["id"];
+            directory_generate::file_generation_tree.append(cur_file_tree);
         }
     }
     

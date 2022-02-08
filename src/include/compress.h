@@ -8,12 +8,16 @@
 #include <boost/filesystem.hpp>
 #include "common.h"
 
+#include <fcntl.h>
+
 #ifdef _WIN32
 #include <json/json.h>
+#include <io.h>
 #endif
 
 #ifdef unix
 #include <jsoncpp/json/json.h>
+#include <unistd.h>
 #endif
 namespace bfs = boost::filesystem;
 
@@ -25,5 +29,12 @@ class compress_directory {
         void walk_directory(const std::string& start_dir, const std::string& input_dir, zip_t *zipper);
         std::vector<std::string> generate_file_array(const std::string& input_dir);
 };
+
+class decompress_archive {
+    public:
+        std::string decompress(const char *file_string, const char *to_fetch);
+        long long decompress_archive::decompress_bin(const char *file_string, const char *to_fetch);
+};  
+
 
 #endif
