@@ -6,6 +6,7 @@ void directory_generate::from_file(string root_directory_name, string file_strin
 
     string fetched_structure_raw = da.decompress(file_string.c_str(), "structure.json");
 
+
     // Convert data to JSON
     Json::Value fetched_structure;   
     Json::Reader reader;

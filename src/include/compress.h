@@ -33,7 +33,7 @@ class compress_directory {
 class decompress_archive {
     public:
         std::string decompress(const char *file_string, const char *to_fetch);
-        long long decompress_archive::decompress_bin(const char *file_string, const char *to_fetch);
+        long long decompress_bin(const char *file_string, const char *to_fetch);
 };  
 
 

@@ -90,7 +90,7 @@ long long decompress_archive::decompress_bin(const char *file_string, const char
 	struct zip_file *zf;
 	char buf[100];
 	struct zip_stat sb;
-	zip_int64_t len;
+	int len;
 	int fd;
 	long long sum;
 	
@@ -118,7 +118,7 @@ long long decompress_archive::decompress_bin(const char *file_string, const char
 		}
 
 		sum = 0;
-		fd = open(sb.name, O_RDWR | O_TRUNC | O_CREAT | O_BINARY, 0644);
+		fd = open(sb.name, O_RDWR | O_TRUNC | O_CREAT, 0644); // Windows might need O_BINARY
 		if (fd < 0) {
 			fprintf(stderr, "boese, boese\n");
 			exit(101);

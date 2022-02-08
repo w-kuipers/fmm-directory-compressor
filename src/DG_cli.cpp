@@ -3,12 +3,14 @@
 int main(int argc, char** argv) {
 
     // Handle args
-    for (int a = 0; a < argc; a++) {
+    if (argc == 2) {
+        for (int a = 0; a < argc; a++) {
 
-        // Deal with long paths (windows..)
-        if (string(argv[a]) == "--skip-long-paths") {
-            SKIPLONGPATHS = true;
-            cout << "Skipping any path that is larger than 260 characters" << endl;
+            // Deal with long paths (windows..)
+            if (string(argv[a]) == "--skip-long-paths") {
+                SKIPLONGPATHS = true;
+                cout << "Skipping any path that is larger than 260 characters" << endl;
+            }
         }
     }
 
@@ -23,8 +25,8 @@ int main(int argc, char** argv) {
     #endif
 
     #ifdef unix
-    string file = "../tests/generated_test.json";
-    string location = "../tests/";
+    string file = "../tests/fpstest/test.fps";
+    string location = "../tests/generated_tests";
     string directory = "/home/wibo/Documents/PROTO";
     #endif
     
@@ -41,7 +43,7 @@ int main(int argc, char** argv) {
     //     cin >> structure_name;
     // }
 
-    gz.from_path(directory, structure_name, "../tests/fpstest/");
+    // gz.from_path(directory, structure_name, "../tests/fpstest/");
         
     return 0;
 };
