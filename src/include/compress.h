@@ -16,7 +16,7 @@
 #endif
 
 #ifdef unix
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 #include <unistd.h>
 #endif
 namespace bfs = boost::filesystem;
