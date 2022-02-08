@@ -1,4 +1,4 @@
-#include "include/DG_py.h"
+#include "include/DC_py.h"
 
 // Generate FPS file from directory path
 void generate_file_from_path(string path, string name, string location, bool _SKIPLONGPATHS = false) { // TODO when skiplongpaths is not passed in python the functions failes
