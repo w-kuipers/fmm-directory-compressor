@@ -5,7 +5,6 @@
 #include <string>
 #include "generate.h"
 
-namespace py = pybind11;
 directory_generate dg;
 generate_zip gz;
 

@@ -108,9 +108,6 @@ void decompress_archive::decompress_bin(const char *file_string, const char *to_
 		// Get name of current iteration
 		len = strlen(sb.name);
 
-		std::cout << sb.name << std::endl;
-
-
 		zf = zip_fopen(za, to_fetch, 0);
 		if (!zf) {
 			fprintf(stderr, "boese, boese\n");

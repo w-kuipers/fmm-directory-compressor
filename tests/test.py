@@ -1,9 +1,9 @@
 import sys
 
-sys.path.insert(0, '../build')
+sys.path.insert(0, '../build/Debug')
 
-from generate_directory import generate_file_from_path, generate_structure_from_file
+from fmmpy_directory_compressor import compress_directory, decompress_directory
 
-# generate_file_from_path('/home/wibo/Documents/PROTO', 'Pythontest', './pythonTests/', True)
+# compress_directory('C:/Users/wkuip/Desktop/code/FMM_dirstructure_generator/tests/to_use', 'Pythontest', './pythonTests/', True)
 
-generate_structure_from_file('pythonMappie', 'pythonTests/Pythontest.fps', './pythonTests/')
+decompress_directory('pythonMappie', 'pythonTests/Pythontest.fps', './pythonTests/')

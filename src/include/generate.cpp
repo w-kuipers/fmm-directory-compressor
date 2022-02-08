@@ -11,6 +11,10 @@ void directory_generate::from_file(string root_directory_name, string file_strin
         std::cout << "Error: Desination directory does not exist!\n";
         return;
     }
+    if (bfs::exists(location + "/" + root_directory_name)) {
+        std::cout << "Error: A directory with this name already exists!\n";
+        return;
+    }
 
     decompress_archive da;
 
