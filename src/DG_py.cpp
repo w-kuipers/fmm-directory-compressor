@@ -1,11 +1,12 @@
 #include "include/DG_py.h"
 
-namespace py = pybind11;
-directory_generate dg;
-generate_zip gz;
-
 // Generate FPS file from directory path
-void generate_file_from_path(string path, string name, string location) {
+void generate_file_from_path(string path, string name, string location, bool _SKIPLONGPATHS = false) { // TODO when skiplongpaths is not passed in python the functions failes
+
+    if (_SKIPLONGPATHS) {
+        SKIPLONGPATHS = true;
+    }
+
     gz.from_path(path, name, location);
 }
 
