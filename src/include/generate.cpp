@@ -58,7 +58,6 @@ void directory_generate::traverse(Json::Value json_data, string path) {
 
             // Check if current level has sublevels, if so call the function again
             directory_generate::traverse(json_data[d]["content"], new_path);
-
         }
 
         // Check if current iteration type is file
@@ -68,6 +67,7 @@ void directory_generate::traverse(Json::Value json_data, string path) {
             directory_generate::file_generation_tree[directory_generate::file_generation_tree.size()] = new_path;
         }
     }
+    
     return;
 }
 
