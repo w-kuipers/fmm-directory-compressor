@@ -2,8 +2,13 @@
 
 int main(int argc, char** argv) {
 
+    if (argc < 2) {
+        cerr << "No arguments where given";
+        return 1;
+    }
+
     // Handle args
-    for (int a = 0; a < argc; a++) {
+    for (int a = 1; a < argc; a++) {
 
         // Deal with long paths (windows..)
         if (string(argv[a]) == "--skip-long-paths") {
