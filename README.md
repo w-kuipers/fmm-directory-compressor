@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+Compress a directory into a single .FPS file. This library was build for the Filmage Media Manager to create project directory structures.
+
 ## Installation
 
 ### Linux
