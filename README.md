@@ -43,7 +43,7 @@ The python wrapper yields the same functionality as the CLI application. Just in
 
 ## Support
 
-If you found a problem with the software, please [create an issue](https://github.com/w-kuipers/python-project-minify/issues) on GitHub.
+If you found a problem with the software, please [create an issue](https://github.com/w-kuipers/fmm-directory-compressor/issues) on GitHub.
 
 ## Maintainer
 
