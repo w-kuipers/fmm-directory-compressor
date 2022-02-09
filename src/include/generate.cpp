@@ -1,6 +1,6 @@
 /*
 
- *  FMM Directory Compressor - Compressing directory structures to a .FPS file.
+ *  FMM Directory Compressor
 
  *  Copyright (C) 2022  Wibo Kuipers
  
@@ -235,7 +235,7 @@ void generate_zip::from_path(string path, string name, string location) {
     }
 
     // Check if filename is available
-    if (bfs::exists(location + "/" + name + ".fps")) {
+    if (bfs::exists(location + "/" + name + ".fsa")) {
         cout << "Error: File already exists!\n";
         return;
     }
@@ -270,9 +270,9 @@ void generate_zip::from_path(string path, string name, string location) {
         dst << src.rdbuf();
     }
 
-    // Compress the directory into a .FPS file
+    // Compress the directory into a .FSA file
     compress_directory cp;
-    cp.compress(temp_directory_path, location + "/" + name + ".fps");
+    cp.compress(temp_directory_path, location + "/" + name + ".fsa");
 
     // Remove temp directory
     bfs::remove_all(temp_directory_path);

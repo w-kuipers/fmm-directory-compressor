@@ -1,6 +1,6 @@
 /*
 
- *  FMM Directory Compressor - Compressing directory structures to a .FPS file.
+ *  FMM Directory Compressor
 
  *  Copyright (C) 2022  Wibo Kuipers
  
@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
     }
     else if (string(argv[1]) == "decompress-directory") {
         if (argc < 4) {
-            cerr << "\nError: compress-directory takes 2 arguments (.FPS file, dst)\n";
+            cerr << "\nError: compress-directory takes 2 arguments (.FSA file, dst)\n";
             return 1;
         }
 

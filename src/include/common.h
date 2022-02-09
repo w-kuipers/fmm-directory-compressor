@@ -1,6 +1,6 @@
 /*
 
- *  FMM Directory Compressor - Compressing directory structures to a .FPS file.
+ *  FMM Directory Compressor
 
  *  Copyright (C) 2022  Wibo Kuipers
  

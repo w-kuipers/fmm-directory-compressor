@@ -1,6 +1,6 @@
 /*
 
- *  FMM Directory Compressor - Compressing directory structures to a .FPS file.
+ *  FMM Directory Compressor
 
  *  Copyright (C) 2022  Wibo Kuipers
  
@@ -22,7 +22,7 @@
 
 #include "include/DC_py.h"
 
-// Generate FPS file from directory path
+// Generate FSA file from directory path
 void compress_directory(std::string path, std::string name, std::string location, bool _SKIPLONGPATHS = false) { // TODO when skiplongpaths is not passed in python the functions failes
 
     if (_SKIPLONGPATHS) {
@@ -34,7 +34,7 @@ void compress_directory(std::string path, std::string name, std::string location
     return;
 }
 
-// Generate the directory structure from FPS file
+// Generate the directory structure from FSA file
 void decompress_directory(std::string directory_name, std::string file_string, std::string location) {
     dg.from_file(directory_name, file_string, location);
 

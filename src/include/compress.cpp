@@ -1,6 +1,6 @@
 /*
 
- *  FMM Directory Compressor - Compressing directory structures to a .FPS file.
+ *  FMM Directory Compressor
 
  *  Copyright (C) 2022  Wibo Kuipers
  
@@ -77,7 +77,7 @@ void compress_directory::compress(const std::string& input_dir, const std::strin
 }
 
 std::string decompress_archive::decompress(const char *file_string, const char *to_fetch) {
-	// Open the FPS archive
+	// Open the FSA archive
     int err = 0;
     zip *z = zip_open(file_string, 0, &err);
 
