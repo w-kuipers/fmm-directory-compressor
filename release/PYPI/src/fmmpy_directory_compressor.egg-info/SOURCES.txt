@@ -1,0 +1,7 @@
+LICENSE
+README.md
+setup.py
+src/fmmpy_directory_compressor.egg-info/PKG-INFO
+src/fmmpy_directory_compressor.egg-info/SOURCES.txt
+src/fmmpy_directory_compressor.egg-info/dependency_links.txt
+src/fmmpy_directory_compressor.egg-info/top_level.txt
