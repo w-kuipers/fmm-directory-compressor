@@ -1,0 +1,6 @@
+Package: fmm-directory-compressor
+Version: 0.1.0
+Maintainer: Wibo Kuipers <w.kuipers@filmage.nl>
+Architecture: amd64
+Homepage: https://github.com/w-kuipers/fmm-directory-compressor/
+Description: Compress a directory into a single .FPS file.
