@@ -1,3 +1,4 @@
-from src.unix.fmmpy_directory_compressor import compress_directory, decompress_directory
+# from src.unix.fmmpy_directory_compressor import compress_directory, decompress_directory
+import fmmpy
 
-compress_directory('/home/wibo/Downloads/FILMAGE-DIRSTRUCTURE-TEMPLATE', 'Pythontest', './tests/', True)
+# compress_directory('/home/wibo/Downloads/FILMAGE-DIRSTRUCTURE-TEMPLATE', 'Pythontest', './tests/', True)

@@ -16,6 +16,31 @@ Compress a directory into a single .FPS file. This library was build for the Fil
     pip install fmmpy-directory-compressor
 
 
+## Usage
+
+### CLI
+#### Compress directory
+    fmm-directory-compressor compress-directory path/to/src path/to/dst
+
+You'll be asked to provide a filename. A .fps file will be generated.
+If you are using windows, the compression might fail when your source directory contains paths that are longer than 260 characters. These file paths can be ignored with the `--skip-long-paths` flag, but with this method these files/directories wont be present in the compressed file. 
+
+#### Decompress directory
+    fmm-directory-compressor decompress-directory path/to/file.fps path/to/dst
+You'll be asked to provide a root directory name. The directory structure will be rebuild.
+
+### Python API
+The python wrapper yields the same functionality as the CLI application. Just include the library and you're ready to go.
+
+    import fmm_directory_compressor
+
+    ## Compress directory
+    fmm_directory_compressor.compress_directory("path/to/src", "yourfilename", "path/to/dst")
+
+    ## Decompress directory
+    fmm_directory_compressor.decompress_directory("root-directory-name", "path/to/yourfile.fps", "path/to/dst")
+
+
 ## Support
 
 If you found a problem with the software, please [create an issue](https://github.com/w-kuipers/python-project-minify/issues) on GitHub.
