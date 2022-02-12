@@ -14,6 +14,8 @@ Compress a directory into a single .FSA file. This library was build for the Fil
 ### Python API
 
     pip install fmmpy-directory-compressor
+    
+ Note the `pip` refers to the Python 3 package manager. In environment where Python 2 is also available the correct command may be `pip3`.
 
 
 ## Usage
