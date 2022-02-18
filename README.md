@@ -1,6 +1,7 @@
 # FMM Directory Compressor
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![PyPI release](https://img.shields.io/pypi/v/fmmpy-directory-compressor)](https://pypi.org/project/fmmpy-directory-compressor/)
 
 Compress a directory into a single .FSA file. This library was build for the Filmage Media Manager to create project directory structures.
 
