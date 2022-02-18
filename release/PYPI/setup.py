@@ -1,17 +1,7 @@
 import setuptools
 
-
-from sys import platform
-if platform == "linux" or platform == "linux2":
-    src_location = "src/unix"
-elif platform == "win32":
-    src_location = "src/win32"
-
-
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
-
-
 
 setuptools.setup(
     name="fmmpy-directory-compressor",
@@ -31,7 +21,8 @@ setuptools.setup(
         "Operating System :: POSIX :: Linux",
         "Operating System :: Microsoft :: Windows",
     ],
-    package_dir={"": src_location},
-    packages=setuptools.find_packages(where=src_location),
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src"),
     python_requires=">=3.8",
+    include_package_data=True,
 )
