@@ -1,6 +1,6 @@
 from sys import platform
 if platform == "linux" or platform == "linux2":
-    src_location = "src/unix"
+    from .unix.fmmpy_directory_compressor import compress_directory, decompress_directory
 elif platform == "win32":
     from .win32.fmmpy_directory_compressor import compress_directory, decompress_directory
 else:

@@ -5,10 +5,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="fmmpy-directory-compressor",
-    version="0.1.0.post1",
+    version="0.1.0.post2",
     author="Wibo Kuipers",
     author_email="w.kuipers@filmage.nl",
-    description="Compress a directory into a single .FPS file.",
+    description="Compress a directory into a single .FSA file.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/w-kuipers/fmm-directory-compressor",

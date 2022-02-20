@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: fmmpy-directory-compressor
-Version: 0.1.0.post1
-Summary: Compress a directory into a single .FPS file.
+Version: 0.1.0.post2
+Summary: Compress a directory into a single .FSA file.
 Home-page: https://github.com/w-kuipers/fmm-directory-compressor
 Author: Wibo Kuipers
 Author-email: w.kuipers@filmage.nl
