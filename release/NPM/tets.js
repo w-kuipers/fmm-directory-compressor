@@ -1,0 +1,1 @@
+compress_directory = Module.cwrap()
