@@ -20,7 +20,7 @@
  
 # **** END GPL LICENSE BLOCK ****
 
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.5.1)
 
 set(version_number "0.1.0")
 
@@ -39,11 +39,28 @@ if (WIN32)
     find_package(libzip CONFIG REQUIRED)
     find_package(pybind11 CONFIG REQUIRED)
 
-    add_executable(fmm-directory-compressor src/DC_cli.cpp src/include/generate.cpp src/include/win32/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
-    pybind11_add_module(fmmpy_directory_compressor src/DC_py.cpp src/include/generate.cpp src/include/win32/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
+    if (cli OR all)
+        add_executable(fmm-directory-compressor src/DC_cli.cpp src/include/generate.cpp src/include/win32/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
+        target_link_libraries(fmm-directory-compressor ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib jsoncpp_object JsonCpp::JsonCpp libzip::zip)
+    endif (main OR all)
 
-    target_link_libraries(fmmpy_directory_compressor PRIVATE ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib jsoncpp_object JsonCpp::JsonCpp libzip::zip)
-    target_link_libraries(fmm-directory-compressor ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib jsoncpp_object JsonCpp::JsonCpp libzip::zip)
+    if (py OR all)
+        pybind11_add_module(fmmpy_directory_compressor src/DC_py.cpp src/include/generate.cpp src/include/win32/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
+        target_link_libraries(fmmpy_directory_compressor PRIVATE ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib jsoncpp_object JsonCpp::JsonCpp libzip::zip)
+    endif (py OR all)
+
+    if (js OR all)
+        include(C:/dev/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+
+        add_executable(fmmjs-directory-compressor src/DC_cli.cpp src/include/generate.cpp src/include/win32/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
+
+        message(STATUS "Setting compilation target to WASM")
+        set(CMAKE_EXECUTABLE_SUFFIX ".wasm.js")
+        set_target_properties(a PROPERTIES LINK_FLAGS "-s WASM=1 -s EXPORTED_FUNCTIONS='[_main]'")
+
+        target_link_libraries(fmmjs_directory_compressor PRIVATE ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_lib jsoncpp_object JsonCpp::JsonCpp libzip::zip)
+    endif (js OR all)
+    
 
 endif (WIN32)
 
@@ -57,11 +74,15 @@ if (UNIX)
     find_package(libzip REQUIRED)
     find_package(pybind11 CONFIG REQUIRED)
 
-    add_executable(fmm-directory-compressor src/DC_cli.cpp src/include/generate.cpp src/include/linux/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
-    pybind11_add_module(fmmpy_directory_compressor src/DC_py.cpp src/include/generate.cpp src/include/linux/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
+    if (cli OR all)
+        add_executable(main/fmm-directory-compressor src/DC_cli.cpp src/include/generate.cpp src/include/linux/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
+        target_link_libraries(fmm-directory-compressor ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_object jsoncpp_static JsonCpp::JsonCpp libzip::zip)
+    endif (main OR all)
 
-    target_link_libraries(fmmpy_directory_compressor PRIVATE ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_object jsoncpp_static JsonCpp::JsonCpp libzip::zip)
-    target_link_libraries(fmm-directory-compressor ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_object jsoncpp_static JsonCpp::JsonCpp libzip::zip)
+    if (py OR all)
+        pybind11_add_module(python/fmmpy_directory_compressor src/DC_py.cpp src/include/generate.cpp src/include/linux/make_dir.cpp src/include/compress.cpp src/include/common.cpp)
+        target_link_libraries(fmmpy_directory_compressor PRIVATE ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} jsoncpp_object jsoncpp_static JsonCpp::JsonCpp libzip::zip)
+    endif (py OR all)  
     
 endif (UNIX)
 

@@ -19,3 +19,15 @@
  *  If not, see https://github.com/w-kuipers/fmm-directory-compressor/blob/master/LICENSE.
  
  */
+
+#ifndef __JSMODULE
+#define __JSMODULE
+
+#include <emscripten/bind.h>
+#include "generate.h"
+
+using namespace emscripten;
+
+bool SKIPLONGPATHS;
+
+#endif

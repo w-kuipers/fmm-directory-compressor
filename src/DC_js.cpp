@@ -19,3 +19,30 @@
  *  If not, see https://github.com/w-kuipers/fmm-directory-compressor/blob/master/LICENSE.
  
  */
+
+#include "include/DC_js.h"
+
+// Generate FSA file from directory path
+void compress_directory(std::string path, std::string name, std::string location, bool _SKIPLONGPATHS = false) { // TODO when skiplongpaths is not passed in python the functions failes
+
+    if (_SKIPLONGPATHS) {
+        SKIPLONGPATHS = true;
+    }
+
+    gz.from_path(path, name, location);
+
+    return;
+}
+
+// Generate the directory structure from FSA file
+void decompress_directory(std::string directory_name, std::string file_string, std::string location) {
+    dg.from_file(directory_name, file_string, location);
+
+    return;
+}
+
+// JavaScript module
+EMSCRIPTEN_BINDINGS(fmmjs_directory_compressor) {
+    function("compress_directory", &compress_directory);
+    function("decompress_directory", &decompress_directory);
+}
