@@ -44,7 +44,7 @@ The python wrapper yields the same functionality as the CLI application. Just in
     fmm_directory_compressor.decompress_directory("root-directory-name", "path/to/yourfile.fsa", "path/to/dst")
 
 ## Building
-##### CLI program and Python wrapper
+#### CLI program and Python wrapper
 The majority of this project uses CMake to build the executables. In the root/build directory run:
 
     cmake .. [options]
@@ -52,7 +52,7 @@ The majority of this project uses CMake to build the executables. In the root/bu
 
 This will build a Debug executable.
 
-##### JavaScript Wrapper
+#### JavaScript Wrapper
 For building the JavaScript wrapper `emscripten` is required. Please refer to the [official installation manual](https://emscripten.org/docs/getting_started/downloads.html).
 
 To build the JavaScript wrapper run this command in the root directory:
