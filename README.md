@@ -62,9 +62,9 @@ To build the JavaScript wrapper run this command in the root directory:
 #### Table of options:
 | Option flag    |     Does  |
 | ------------- | -----:|
-| -Dall      | Builds everything |
-| -Dcli     |   Builds only the Command Line Interface program |
-| -Dpy     |   Builds only the Python wrapper |
+| -DALL     | Builds everything |
+| -DCLI   |   Builds only the Command Line Interface program |
+| -DPY     |   Builds only the Python wrapper |
 
 
 ## Support
