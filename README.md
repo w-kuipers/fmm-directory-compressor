@@ -58,7 +58,7 @@ To build the JavaScript wrapper run this command in the root directory:
     emcc --bind -o build/release/js/fmmjs-directory-compressor.js src/DC_js.cpp
 
 Table of options:
-| Option flag         Does  |
+| Option flag    |     Does  |
 | ------------- | -----:|
 | -Dall      | Builds everything |
 | -Dcli     |   Builds only the Command Line Interface program |
