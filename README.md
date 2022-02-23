@@ -54,6 +54,7 @@ This will build a Debug executable.
 
 #### JavaScript Wrapper
 For building the JavaScript wrapper `emscripten` is required. Please refer to the [official installation manual](https://emscripten.org/docs/getting_started/downloads.html).
+On windows you might want to run the command `emsdk activate latest --permanent` in the emsdk root folder.
 
 To build the JavaScript wrapper run this command in the root directory:
 
