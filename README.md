@@ -12,7 +12,7 @@ Compress a directory into a single .FSA file. This library was build for the pro
 The project has not yet been published to any APT repository, but a .deb build is provided [here](https://github.com/w-kuipers/fmm-directory-compressor/releases/download/v0.1.0/fmm-directory-compressor_0.1.0-1_amd64.deb).
 
 #### Windows
-Windows installer is provided [here](https://github.com/w-kuipers/fmm-directory-compressor/releases/download/v0.1.0/fmm_directory_compressor_v0.1.0-beta_x64-windows_installer.exe)
+Windows installer is provided [here](https://github.com/w-kuipers/fmm-directory-compressor/releases/download/v0.1.0/fmm_directory_compressor_v0.1.0-beta_x64-windows_installer.exe).
 The installer does not automatically it to the system environment path.
 
 ### Python API
