@@ -41,7 +41,7 @@ void decompress_directory(std::string directory_name, std::string file_string, s
     return;
 }
 
-// Python module
+// Python module returning
 PYBIND11_MODULE(fmmpy_directory_compressor, m) {
     m.doc() = "Python wrapper for the FMM project structure generator";
     m.def("compress_directory", &compress_directory);
